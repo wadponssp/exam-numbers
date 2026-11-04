@@ -1,0 +1,1476 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>หมายเลขแบบทดสอบ ม.6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: green header band, then a two-column workspace (subject finder | numbers for the chosen subject); stacks on phones. Tokens follow the SSP Green design system. */
+:root {
+  --band: #1e816c;
+  --accent: #1e816c;
+  --accent-hover: #16624f;
+  --on-brand: #ffffff;
+  --heading: #0f4a3c;
+  --link: #16624f;
+  --tint: #f0f8f5;
+  --tint-strong: #ddf0e9;
+  --focus-halo: #bfe3d7;
+  --exam-date: #8b1a2b;
+  --gold: #e2b007;
+  --ink: #17302a;
+  --muted: #566b65;
+  --field-border: #7a938c;
+  --line: #cfddd8;
+  --surface: #f5f9f7;
+  --card: #ffffff;
+  --warn-ink: #6b4e00;
+  --warn-bg: #fff6db;
+  --match-bg: #fff1bf;
+  --shadow-card: 0 1px 2px rgba(15, 74, 60, 0.06), 0 6px 20px rgba(15, 74, 60, 0.07);
+  --paper: #ffffff;
+  --scrim: rgba(8, 20, 16, 0.95);
+  --on-scrim: #ffffff;
+
+  --font: "Sarabun", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --control-h: 46px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --band: #14594a;
+    --accent: #1e816c;
+    --accent-hover: #26957d;
+    --on-brand: #ffffff;
+    --heading: #b5e6d5;
+    --link: #8fd3bd;
+    --tint: #162b25;
+    --tint-strong: #1d3a32;
+    --focus-halo: #2d5a4e;
+    --exam-date: #f2a7b1;
+    --gold: #e2b007;
+    --ink: #e4efeb;
+    --muted: #9db3ab;
+    --field-border: #6f8a83;
+    --line: #29403a;
+    --surface: #0e1916;
+    --card: #13221e;
+    --warn-ink: #f2d98c;
+    --warn-bg: #352b0c;
+    --match-bg: #3d3412;
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --band: #14594a;
+  --accent: #1e816c;
+  --accent-hover: #26957d;
+  --on-brand: #ffffff;
+  --heading: #b5e6d5;
+  --link: #8fd3bd;
+  --tint: #162b25;
+  --tint-strong: #1d3a32;
+  --focus-halo: #2d5a4e;
+  --exam-date: #f2a7b1;
+  --gold: #e2b007;
+  --ink: #e4efeb;
+  --muted: #9db3ab;
+  --field-border: #6f8a83;
+  --line: #29403a;
+  --surface: #0e1916;
+  --card: #13221e;
+  --warn-ink: #f2d98c;
+  --warn-bg: #352b0c;
+  --match-bg: #3d3412;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.num { font-variant-numeric: tabular-nums; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+a { color: var(--link); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Header band */
+.band {
+  background: var(--band);
+  color: var(--on-brand);
+  border-bottom: 4px solid var(--gold);
+}
+.band-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 18px 20px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+}
+.band h1 { font-size: 24px; line-height: 1.25; font-weight: 700; }
+.band p { margin: 0; font-size: 15px; opacity: 0.92; }
+
+/* Workspace */
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-block: 20px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.card {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+}
+
+/* Finder */
+.finder {
+  position: sticky;
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+}
+.finder-top {
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.label { font-size: 15px; font-weight: 600; color: var(--ink); }
+.search {
+  position: relative;
+}
+.search input {
+  width: 100%;
+  height: var(--control-h);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+  padding: 0 44px 0 14px;
+}
+.search input::placeholder { color: var(--muted); }
+.search input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--focus-halo); }
+.search .clear {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 22px;
+  line-height: 1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.search .clear:hover { background: var(--tint); color: var(--ink); }
+.hint { font-size: 14px; color: var(--muted); margin: 0; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter {
+  min-height: 38px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--field-border);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.filter:hover { background: var(--tint); }
+.filter[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-brand); }
+
+select#group {
+  width: 100%;
+  height: var(--control-h);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  padding: 0 12px;
+}
+
+.result-line { font-size: 14px; color: var(--muted); margin: 0; }
+.result-line strong { color: var(--ink); font-weight: 600; }
+
+.list {
+  overflow-y: auto;
+  padding: 6px 18px 18px;
+  overscroll-behavior: contain;
+}
+.day { padding-top: 12px; }
+.day-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--exam-date);
+  margin: 0 0 6px;
+}
+.slot { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.slot-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: var(--control-h);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--field-border);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  max-width: 100%;
+}
+.chip:hover { background: var(--tint); }
+.chip .code { font-size: 13px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-brand); }
+.chip[aria-pressed="true"] .code { color: var(--on-brand); opacity: 0.85; }
+.empty {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--tint);
+  color: var(--ink);
+  font-size: 15px;
+}
+
+/* Detail */
+.detail { padding: 24px; display: flex; flex-direction: column; gap: 18px; scroll-margin-top: 12px; }
+.detail-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 20px;
+  align-items: flex-start;
+}
+.detail-head > div { min-width: 0; flex: 1 1 320px; }
+.detail-head > .actions { flex: 0 0 auto; }
+.eyebrow { font-size: 15px; font-weight: 600; color: var(--muted); margin: 0 0 2px; }
+.eyebrow .code { color: var(--link); }
+.detail h2 { font-size: 26px; line-height: 1.3; color: var(--heading); font-weight: 700; }
+.when { margin: 6px 0 0; font-size: 16px; color: var(--ink); }
+.when .date { color: var(--exam-date); font-weight: 600; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--control-h);
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent);
+  background: var(--card);
+  color: var(--link);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--tint); }
+.copy-status { font-size: 14px; color: var(--link); margin: 6px 0 0; text-align: right; max-width: 260px; }
+.copy-status:empty { display: none; }
+.copy-fallback { width: 100%; min-height: 160px; font: inherit; font-size: 14px; border: 1px solid var(--field-border); border-radius: var(--radius-sm); background: var(--card); color: var(--ink); padding: 10px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+  gap: 10px;
+}
+.stat {
+  background: var(--tint);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  min-width: 0;
+}
+.stat-label { font-size: 13px; color: var(--muted); font-weight: 600; margin: 0; }
+.stat-value { font-size: 22px; font-weight: 700; color: var(--heading); margin: 0; line-height: 1.35; }
+.stat-value.big { font-size: 28px; }
+.stat-value small { font-size: 15px; font-weight: 500; color: var(--muted); }
+.stat-value.text { font-size: 17px; font-weight: 600; line-height: 1.45; }
+
+.notice {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  font-size: 15px;
+  margin: 0;
+}
+.notice.info { background: var(--tint-strong); color: var(--heading); }
+
+/* Room table */
+.rooms { overflow-x: auto; }
+.rooms-head, .room {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 150px;
+  gap: 4px 16px;
+  align-items: start;
+}
+.rooms-head {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0 12px 8px;
+  border-bottom: 2px solid var(--line);
+}
+.rooms-head .r { text-align: right; }
+.room {
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.room-name { font-weight: 700; font-size: 17px; color: var(--ink); line-height: 1.35; }
+.room-name small { display: block; font-size: 14px; font-weight: 500; color: var(--muted); }
+.segs { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.seg {
+  display: grid;
+  grid-template-columns: 52px minmax(92px, 1fr) 62px 96px;
+  gap: 8px;
+  align-items: baseline;
+  padding: 2px 8px;
+  margin: 0 -8px;
+  border-radius: var(--radius-sm);
+}
+.seg .cls { font-weight: 700; }
+.seg .seats { color: var(--muted); font-size: 15px; }
+.seg .cnt { color: var(--muted); font-size: 15px; text-align: right; }
+.seg .rng { font-weight: 600; text-align: right; }
+.seg.match { background: var(--match-bg); }
+.envelope { text-align: right; }
+.envelope b { display: block; font-size: 20px; color: var(--heading); line-height: 1.3; }
+.envelope span { font-size: 14px; color: var(--muted); }
+.room.has-match { background: var(--tint); }
+
+.source { font-size: 14px; color: var(--muted); margin: 0; }
+
+/* Print documents */
+.print {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.print-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+}
+.print-head h3 { font-size: 18px; line-height: 1.4; color: var(--heading); }
+.spare { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.spare-label { font-size: 15px; font-weight: 600; color: var(--ink); }
+.docs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.doc {
+  background: var(--tint);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+.doc h4 { margin: 0; font-size: 17px; line-height: 1.4; color: var(--ink); }
+.doc p { margin: 0; font-size: 14px; color: var(--muted); }
+.thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  min-height: 112px;
+  align-items: flex-start;
+}
+.thumb {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  cursor: zoom-in;
+  line-height: 0;
+}
+.thumb img { display: block; height: 104px; width: auto; border-radius: 3px; }
+.thumb-wait { font-size: 14px; color: var(--muted); align-self: center; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-brand); }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.print-status { margin: 0; font-size: 15px; color: var(--link); }
+.print-status:empty { display: none; }
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--scrim);
+  display: flex;
+  flex-direction: column;
+  padding-top: max(12px, env(safe-area-inset-top, 0px));
+  padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  gap: 10px;
+}
+.viewer[hidden] { display: none; }
+.viewer-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 12px;
+  color: var(--on-scrim);
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+.viewer-head { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.viewer-head b { font-size: 16px; line-height: 1.45; }
+.viewer-hint { font-size: 14px; line-height: 1.5; opacity: 0.9; }
+.viewer-bar .btn { flex: 0 0 auto; min-height: 40px; padding: 6px 16px; }
+.viewer-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-block: 4px 16px;
+}
+.sheet { margin: 0; width: min(100%, 640px); display: flex; flex-direction: column; gap: 6px; }
+.sheet.land { width: min(100%, 1000px); }
+.sheet img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 210 / 297;
+  background: var(--paper);
+  border-radius: 4px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+.sheet.land img { aspect-ratio: 297 / 210; }
+.sheet figcaption { color: var(--on-scrim); font-size: 14px; text-align: center; opacity: 0.9; }
+.doc-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.doc-actions .btn { flex: 1 1 150px; }
+
+/* Phones and narrow windows */
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  .finder { position: static; max-height: none; }
+  .list { overflow: visible; }
+}
+@media (max-width: 640px) {
+  .detail { padding: 18px 16px; }
+  .detail h2 { font-size: 22px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat.wide { grid-column: 1 / -1; }
+  .rooms-head { display: none; }
+  .room { grid-template-columns: minmax(0, 1fr) auto; padding: 12px 4px; }
+  .room .segs { grid-column: 1 / -1; grid-row: 2; }
+  .seg { grid-template-columns: 46px minmax(0, 1fr) 46px 84px; gap: 6px; }
+  .docs { grid-template-columns: minmax(0, 1fr); }
+  .print { padding: 14px 12px; }
+  .copy-status { text-align: left; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip, .filter, .btn { transition: background-color 120ms ease, color 120ms ease; }
+}
+</style>
+
+</head>
+<body>
+<header class="band">
+  <div class="band-inner">
+    <h1>หมายเลขแบบทดสอบ ม.6</h1>
+    <p>สอบกลางภาค ภาคเรียนที่ 2/2569 · 9, 11 และ 13 พฤศจิกายน 2569</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <aside class="card finder" aria-label="ค้นหาวิชา">
+    <div class="finder-top">
+      <label class="label" for="q">ค้นหาวิชา</label>
+      <div class="search">
+        <input id="q" type="search" autocomplete="off" enterkeyhint="search"
+               placeholder="ชื่อวิชา รหัสวิชา ห้องเรียน หรือห้องสอบ">
+        <button class="clear" id="clear" type="button" aria-label="ล้างคำค้นหา" hidden>×</button>
+      </div>
+      <p class="hint">เช่น ภาษาไทย, ค33102, 6/10 หรือ 3507</p>
+      <div class="filters" id="days" role="group" aria-label="วันสอบ"></div>
+      <label class="label" for="group">กลุ่มสาระการเรียนรู้</label>
+      <select id="group"></select>
+      <p class="result-line" id="resultLine" aria-live="polite"></p>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+
+  <section class="card detail" id="detail" aria-live="polite" tabindex="-1"></section>
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  // ผังห้องสอบ: [ห้องสอบที่, หมายเลขห้องสอบ, ระดับ/ห้อง, เลขที่เริ่ม, เลขที่สิ้นสุด, จำนวน]
+  var SEGMENTS = [
+    [1, "3601", "6/1", 1, 35, 35],
+    [2, "3602", "6/2", 1, 28, 28],
+    [3, "3606", "6/3", 1, 33, 33],
+    [4, "3607", "6/3", 34, 39, 6],
+    [4, "3607", "6/4", 1, 27, 27],
+    [5, "3608", "6/4", 28, 39, 12],
+    [5, "3608", "6/5", 1, 21, 21],
+    [6, "3609", "6/5", 22, 39, 18],
+    [6, "3609", "6/6", 1, 15, 15],
+    [7, "3610", "6/6", 16, 38, 23],
+    [7, "3610", "6/7", 1, 10, 10],
+    [8, "3510", "6/7", 11, 39, 29],
+    [8, "3510", "6/9", 1, 5, 5],
+    [9, "3509", "6/9", 6, 39, 34],
+    [10, "3508", "6/8", 1, 30, 30],
+    [11, "3507", "6/8", 31, 36, 6],
+    [11, "3507", "6/10", 1, 24, 24],
+    [12, "3506", "6/10", 25, 37, 13],
+    [12, "3506", "6/11", 1, 17, 17],
+    [13, "3505", "6/11", 18, 39, 22],
+    [13, "3505", "6/12", 1, 8, 8],
+    [14, "3503", "6/12", 9, 37, 29],
+    [15, "3502", "6/13", 1, 28, 28]
+  ].map(function (s, i) {
+    return { idx: i, room: s[0], roomNo: s[1], cls: s[2], from: s[3], to: s[4], count: s[5] };
+  });
+
+  var DAYS = [
+    { chip: "จ. 9 พ.ย.", full: "วันจันทร์ที่ 9 พฤศจิกายน พ.ศ. 2569", short: "วันจันทร์ที่ 9 พ.ย. 2569" },
+    { chip: "พ. 11 พ.ย.", full: "วันพุธที่ 11 พฤศจิกายน พ.ศ. 2569", short: "วันพุธที่ 11 พ.ย. 2569" },
+    { chip: "ศ. 13 พ.ย.", full: "วันศุกร์ที่ 13 พฤศจิกายน พ.ศ. 2569", short: "วันศุกร์ที่ 13 พ.ย. 2569" }
+  ];
+
+  var G = {
+    th: "ภาษาไทย",
+    ma: "คณิตศาสตร์",
+    sci: "วิทยาศาสตร์และเทคโนโลยี",
+    soc: "สังคมศึกษา ศาสนาและวัฒนธรรม",
+    pe: "สุขศึกษาและพลศึกษา",
+    art: "ศิลปะ",
+    work: "การงานอาชีพ",
+    fl: "ภาษาต่างประเทศ"
+  };
+  var GROUP_ORDER = ["th", "ma", "sci", "soc", "pe", "art", "work", "fl"];
+
+  var NOTE_610 = "ห้อง 6/10 มีทั้งนักเรียนที่เรียนภาษาฝรั่งเศสและภาษาเกาหลี หมายเลขนี้คิดทั้งห้องไว้ก่อน ควรตรวจสอบจำนวนจริง";
+
+  // รายวิชา: รหัส, ชื่อ, กลุ่มสาระ, วัน (0–2), ช่วง, เวลา, ห้องเรียนที่สอบ (เลขห้อง ม.6/x; "all" = ทุกห้อง), ป้ายห้องเรียน, หมายเหตุ
+  var ALL = "all";
+  var SUBJECTS = [
+    ["ค33102", "คณิตศาสตร์ 6", "ma", 0, "เช้า", "08.30–09.30", ALL, "ทุกห้อง"],
+    ["ว30276", "โลก ดาราศาสตร์และอวกาศ 6", "sci", 0, "เช้า", "09.35–10.05", [1, 2, 4, 5, 6, 7], "6/1, 6/2, 6/4–6/7"],
+    ["ว30106", "วิทยาการคำนวณ 2", "sci", 0, "เช้า", "09.35–10.05", [8, 9, 10, 11, 12, 13], "6/8–6/13"],
+    ["ว30277", "เอกภพและกาแล็กซี", "sci", 0, "เช้า", "09.35–10.05", [3], "6/3"],
+    ["ว30107", "การออกแบบและเทคโนโลยี 1", "sci", 0, "เช้า", "10.10–10.40", [1, 2, 3, 4, 5, 6, 7], "6/1–6/7"],
+    ["ง33202", "โลกของงานและการประกอบอาชีพ 2", "work", 0, "เช้า", "10.10–10.40", [8, 9, 10, 11, 12], "6/8–6/12"],
+    ["ศ33102", "ศิลปะ 6", "art", 0, "บ่าย", "13.00–13.30", ALL, "ทุกห้อง"],
+    ["ว30102", "วิทยาศาสตร์กายภาพ 1", "sci", 0, "บ่าย", "13.35–14.35", [1, 2, 3, 4, 5, 6, 7], "6/1–6/7"],
+    ["อ33226", "Academic Reading 2", "fl", 0, "บ่าย", "13.35–14.35", [13], "6/13"],
+    ["ว33207", "พื้นฐานทางปัญญาประดิษฐ์", "sci", 0, "บ่าย", "13.35–14.35", [9], "6/9"],
+    ["ท33202", "วรรณคดีมรดก", "th", 0, "บ่าย", "13.35–14.35", [8, 10, 11, 12], "6/8, 6/10–6/12"],
+    ["ส33102", "สังคมศึกษา ศาสนาและวัฒนธรรม 6", "soc", 1, "เช้า", "08.30–09.30", ALL, "ทุกห้อง"],
+    ["ส33226", "ความสัมพันธ์ระหว่างประเทศ", "soc", 1, "เช้า", "09.35–10.35", [13], "6/13"],
+    ["ส33204", "งานในพระราชดำริ", "soc", 1, "เช้า", "09.35–10.35", [8], "6/8"],
+    ["ฝ33202", "ภาษาฝรั่งเศส 6", "fl", 1, "เช้า", "09.35–10.35", [10], "6/10", NOTE_610],
+    ["ต33202", "ภาษาเกาหลี 6", "fl", 1, "เช้า", "09.35–10.35", [10], "6/10", NOTE_610],
+    ["จ33202", "ภาษาจีน 6", "fl", 1, "เช้า", "09.35–10.35", [11], "6/11"],
+    ["ญ33202", "ภาษาญี่ปุ่น 6", "fl", 1, "เช้า", "09.35–10.35", [12], "6/12"],
+    ["ค33202", "คณิตศาสตร์เพิ่มเติม 6", "ma", 1, "เช้า", "09.35–11.05", [1, 2, 4, 5, 6, 7, 9], "6/1, 6/2, 6/4–6/7, 6/9"],
+    ["ค33212", "คณิตศาสตร์พลังสิบ 6", "ma", 1, "เช้า", "09.35–11.05", [3], "6/3"],
+    ["อ33102", "ภาษาอังกฤษ 6", "fl", 1, "บ่าย", "13.00–14.00", ALL, "ทุกห้อง"],
+    ["ว30101", "วิทยาศาสตร์ชีวภาพ", "sci", 1, "บ่าย", "14.05–15.05", [1, 2, 3, 4, 5, 6, 7, 9], "6/1–6/7, 6/9"],
+    ["อ33228", "Academic Writing 2", "fl", 1, "บ่าย", "14.05–15.05", [13], "6/13"],
+    ["ส33221", "มรดกภูมิปัญญาไทย", "soc", 1, "บ่าย", "14.05–15.05", [8], "6/8"],
+    ["ว30103", "วิทยาศาสตร์กายภาพ 2", "sci", 2, "เช้า", "08.30–09.30", [1, 2, 3, 4, 5, 6, 7], "6/1–6/7"],
+    ["ส33261", "Analytical World History", "soc", 2, "เช้า", "08.30–09.30", [13], "6/13"],
+    ["ส33201", "สัมมนาสังคมศึกษา", "soc", 2, "เช้า", "08.30–09.30", [8], "6/8"],
+    ["ส33284", "เที่ยวใกล้บ้านผ่านเลนส์ภูมิศาสตร์", "soc", 2, "เช้า", "08.30–09.30", [9], "6/9"],
+    ["ฝ33204", "ภาษาฝรั่งเศสเพื่อการสอบและการประกอบอาชีพ 2", "fl", 2, "เช้า", "08.30–09.30", [10], "6/10", NOTE_610],
+    ["ต33204", "ภาษาเกาหลีเพื่อการสอบและการประกอบอาชีพ 2", "fl", 2, "เช้า", "08.30–09.30", [10], "6/10", NOTE_610],
+    ["จ33204", "ภาษาจีนเพื่อการสอบและการประกอบอาชีพ 2", "fl", 2, "เช้า", "08.30–09.30", [11], "6/11"],
+    ["ญ33204", "ภาษาญี่ปุ่นเพื่อการสอบและการประกอบอาชีพ 2", "fl", 2, "เช้า", "08.30–09.30", [12], "6/12"],
+    ["อ33222", "การพูดและนำเสนอในที่สาธารณะ", "fl", 2, "เช้า", "09.35–10.35", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "6/1–6/12"],
+    ["อ33230", "ทักษะการพูดและนำเสนอในที่สาธารณะ", "fl", 2, "เช้า", "09.35–10.35", [13], "6/13"],
+    ["ว30108", "การออกแบบและเทคโนโลยี 2", "sci", 2, "เช้า", "10.40–11.10", [1, 2, 3, 4, 5, 6, 7], "6/1–6/7"],
+    ["พ33102", "สุขศึกษาและพลศึกษา 6", "pe", 2, "บ่าย", "13.00–13.30", ALL, "ทุกห้อง"],
+    ["ท33102", "ภาษาไทย 6", "th", 2, "บ่าย", "13.35–14.35", ALL, "ทุกห้อง"]
+  ].map(function (r, i) {
+    return build({
+      id: "s" + (i + 1),
+      code: r[0], name: r[1], group: r[2], day: r[3], period: r[4], time: r[5],
+      classes: r[6], classLabel: r[7], note: r[8] || ""
+    });
+  });
+
+  function pad3(n) { return String(n).padStart(3, "0"); }
+  function range(a, b) { return pad3(a) + "–" + pad3(b); }
+
+  // หมายเลขเรียงต่อเนื่องในแต่ละวิชา ตามลำดับห้องสอบ 1–15 และเลขที่นักเรียน
+  function build(s) {
+    var segs = SEGMENTS.filter(function (seg) {
+      if (s.classes === ALL) return true;
+      var n = Number(seg.cls.split("/")[1]);
+      return s.classes.indexOf(n) !== -1;
+    });
+    var cum = 0, rooms = [];
+    segs.forEach(function (seg) {
+      var start = cum + 1, end = cum + seg.count;
+      cum = end;
+      var last = rooms[rooms.length - 1];
+      var row = { seg: seg, start: start, end: end };
+      if (last && last.room === seg.room) {
+        last.rows.push(row);
+        last.end = end;
+        last.total += seg.count;
+      } else {
+        rooms.push({ room: seg.room, roomNo: seg.roomNo, rows: [row], start: start, end: end, total: seg.count });
+      }
+    });
+    s.rooms = rooms;
+    s.total = cum;
+    s.search = norm([s.code, s.name, G[s.group]].join(" "));
+    return s;
+  }
+
+  function norm(t) {
+    return String(t).toLowerCase().replace(/[\s.\-–_]/g, "");
+  }
+
+  // Parse a query that names a class ("6/10", "ม.6/10") or an exam room ("3507")
+  function parseTarget(q) {
+    var t = q.trim().replace(/\s+/g, "");
+    var m = t.match(/^(?:ม\.?)?6\/(\d{1,2})$/);
+    if (m) return { kind: "class", value: "6/" + Number(m[1]) };
+    m = t.match(/^(3[56]\d\d)$/);
+    if (m) return { kind: "room", value: m[1] };
+    return null;
+  }
+
+  function segMatches(seg, target) {
+    if (!target) return false;
+    return target.kind === "class" ? seg.cls === target.value : seg.roomNo === target.value;
+  }
+
+  // ---------- state ----------
+  var state = { q: "", day: -1, group: "", selected: "s1" };
+
+  var el = {
+    q: document.getElementById("q"),
+    clear: document.getElementById("clear"),
+    days: document.getElementById("days"),
+    group: document.getElementById("group"),
+    list: document.getElementById("list"),
+    resultLine: document.getElementById("resultLine"),
+    detail: document.getElementById("detail")
+  };
+
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function filtered() {
+    var target = parseTarget(state.q);
+    var nq = norm(state.q);
+    return SUBJECTS.filter(function (s) {
+      if (state.day !== -1 && s.day !== state.day) return false;
+      if (state.group && s.group !== state.group) return false;
+      if (!nq) return true;
+      if (target) {
+        return s.rooms.some(function (r) {
+          return r.rows.some(function (row) { return segMatches(row.seg, target); });
+        });
+      }
+      return s.search.indexOf(nq) !== -1;
+    });
+  }
+
+  // ---------- render: filters ----------
+  function renderDayChips() {
+    var opts = [{ i: -1, label: "ทุกวัน" }].concat(DAYS.map(function (d, i) { return { i: i, label: d.chip }; }));
+    el.days.innerHTML = opts.map(function (o) {
+      return '<button type="button" class="filter" data-day="' + o.i + '" aria-pressed="' + (state.day === o.i) + '">' + esc(o.label) + "</button>";
+    }).join("");
+  }
+
+  function renderGroupSelect() {
+    el.group.innerHTML = '<option value="">ทุกกลุ่มสาระ</option>' + GROUP_ORDER.map(function (k) {
+      return '<option value="' + k + '">' + esc(G[k]) + "</option>";
+    }).join("");
+  }
+
+  // ---------- render: subject chips ----------
+  function renderList() {
+    var items = filtered();
+    var target = parseTarget(state.q);
+
+    var line;
+    if (target && items.length) {
+      line = (target.kind === "class" ? "ห้อง " + target.value : "ห้องสอบ " + target.value) +
+        " สอบ <strong>" + items.length + "</strong> วิชา";
+    } else {
+      line = "แสดง <strong>" + items.length + "</strong> จาก " + SUBJECTS.length + " วิชา";
+    }
+    el.resultLine.innerHTML = line;
+
+    if (!items.length) {
+      el.list.innerHTML = '<p class="empty">ไม่พบวิชาที่ตรงกับ “' + esc(state.q || "ตัวกรองนี้") +
+        "” ลองพิมพ์รหัสวิชา เช่น ค33102 หรือห้องเรียน เช่น 6/10 หรือกด “ทุกวัน”</p>";
+      return;
+    }
+
+    var html = "";
+    DAYS.forEach(function (d, di) {
+      var dayItems = items.filter(function (s) { return s.day === di; });
+      if (!dayItems.length) return;
+      html += '<div class="day"><h3 class="day-title">' + esc(d.short) + "</h3>";
+      ["เช้า", "บ่าย"].forEach(function (p) {
+        var slot = dayItems.filter(function (s) { return s.period === p; });
+        if (!slot.length) return;
+        html += '<div class="slot"><p class="slot-title">ช่วง' + p + '</p><div class="chips">' +
+          slot.map(function (s) {
+            return '<button type="button" class="chip" data-id="' + s.id + '" aria-pressed="' + (s.id === state.selected) + '">' +
+              '<span class="code">' + esc(s.code) + "</span><span>" + esc(s.name) + "</span></button>";
+          }).join("") + "</div></div>";
+      });
+      html += "</div>";
+    });
+    el.list.innerHTML = html;
+  }
+
+  // ---------- render: detail ----------
+  function renderDetail() {
+    var s = SUBJECTS.find(function (x) { return x.id === state.selected; }) || SUBJECTS[0];
+    var d = DAYS[s.day];
+    var target = parseTarget(state.q);
+
+    var notes = "";
+    if (s.note) notes += '<p class="notice">หมายเหตุ: ' + esc(s.note) + "</p>";
+    if (target) {
+      var hit = [];
+      s.rooms.forEach(function (r) {
+        r.rows.forEach(function (row) {
+          if (segMatches(row.seg, target)) hit.push(row);
+        });
+      });
+      if (hit.length) {
+        notes += '<p class="notice info">' + esc(target.kind === "class" ? "ห้อง " + target.value : "ห้องสอบ " + target.value) +
+          " ในวิชานี้: " + hit.map(function (row) {
+            return row.seg.cls + " เลขที่ " + row.seg.from + "–" + row.seg.to + " ใช้หมายเลข " + range(row.start, row.end) + " (ห้องสอบ " + row.seg.room + " · " + row.seg.roomNo + ")";
+          }).map(esc).join(", ") + "</p>";
+      } else {
+        notes += '<p class="notice info">' + esc(target.kind === "class" ? "ห้อง " + target.value : "ห้องสอบ " + target.value) + " ไม่ได้สอบวิชานี้</p>";
+      }
+    }
+
+    var rows = s.rooms.map(function (r) {
+      var roomHit = r.rows.some(function (row) { return segMatches(row.seg, target); });
+      return '<div class="room' + (roomHit ? " has-match" : "") + '">' +
+        '<div class="room-name">ห้องสอบ ' + r.room + "<small>ห้อง " + r.roomNo + "</small></div>" +
+        '<div class="segs">' + r.rows.map(function (row) {
+          var seg = row.seg;
+          return '<div class="seg num' + (segMatches(seg, target) ? " match" : "") + '">' +
+            '<span class="cls">' + seg.cls + "</span>" +
+            '<span class="seats">เลขที่ ' + seg.from + "–" + seg.to + "</span>" +
+            '<span class="cnt">' + seg.count + " คน</span>" +
+            '<span class="rng">' + range(row.start, row.end) + "</span></div>";
+        }).join("") + "</div>" +
+        '<div class="envelope num"><b>' + range(r.start, r.end) + "</b><span>" + r.total + " ชุด</span></div>" +
+        "</div>";
+    }).join("");
+
+    el.detail.innerHTML =
+      '<div class="detail-head"><div>' +
+        '<p class="eyebrow"><span class="code">' + esc(s.code) + "</span> · " + esc(G[s.group]) + "</p>" +
+        "<h2>" + esc(s.name) + "</h2>" +
+        '<p class="when"><span class="date">' + esc(d.full) + "</span> · ช่วง" + s.period + " · " + s.time + " น.</p>" +
+      "</div>" +
+      '<div class="actions"><button type="button" class="btn" id="copyBtn">คัดลอกหมายเลขวิชานี้</button>' +
+      '<p class="copy-status" id="copyStatus" role="status"></p></div></div>' +
+      '<div class="stats">' +
+        '<div class="stat wide"><p class="stat-label">หมายเลขแบบทดสอบ</p><p class="stat-value big num">' + range(1, s.total) + "</p></div>" +
+        '<div class="stat"><p class="stat-label">จำนวนชุด</p><p class="stat-value num">' + s.total + " <small>ชุด</small></p></div>" +
+        '<div class="stat"><p class="stat-label">ห้องสอบ</p><p class="stat-value num">' + s.rooms.length + " <small>ห้อง</small></p></div>" +
+        '<div class="stat wide"><p class="stat-label">ห้องเรียนที่สอบ</p><p class="stat-value text">' + esc(s.classLabel) + "</p></div>" +
+      "</div>" +
+      notes +
+      printSection(s) +
+      '<div class="rooms" role="table" aria-label="หมายเลขแบบทดสอบแยกตามห้องสอบ">' +
+        '<div class="rooms-head" aria-hidden="true"><span>ห้องสอบ</span><span>ห้องเรียน · เลขที่ · จำนวน · หมายเลขแบบทดสอบ</span><span class="r">ซองข้อสอบทั้งห้อง</span></div>' +
+        rows +
+      "</div>" +
+      '<p class="source">ข้อมูลจากชีต “หมายเลขแบบทดสอบ” ในไฟล์ <a href="https://docs.google.com/spreadsheets/d/1xFDJVv1cTaBEND7d_FaKCj7JAh8Bo8oahPFi7uvorLI/edit?usp=sharing" target="_blank" rel="noopener">ห้องสอบ ม.6</a> ดึงข้อมูลเมื่อวันที่ 3 พ.ย. 2569 หมายเลขเรียงต่อเนื่องในแต่ละวิชา ตามลำดับห้องสอบ 1–15 และเลขที่นักเรียน</p>';
+
+    document.getElementById("copyBtn").addEventListener("click", function () { copySubject(s); });
+    renderThumbs(s);
+    if (downloadsReady === false) setPrintStatus(NO_DOWNLOAD);
+  }
+
+  // ---------- PDF: ใบปะหน้ากระเป๋าแบบทดสอบ และ ใบนำส่งกองกลาง ----------
+  // Layout in millimetres, measured from the school's sample PDFs (A4).
+  var DOC = {
+    school: "โรงเรียนสตรีสมุทรปราการ",
+    exam: "แบบทดสอบวัดผลสัมฤทธิ์ กลางภาคเรียนที่ 2 ปีการศึกษา 2569",
+    hubName: "กองกลางอาคาร 3",
+    hubRoom: "169"
+  };
+  var PDF_FONT = 'Sarabun, "Leelawadee UI", Loma, Thonburi, "Noto Sans Thai", sans-serif';
+  var PDF_K = 200 / 25.4;     // 200 dpi
+  var THUMB_K = 1.1;
+  var SLIP_ROWS = 8;
+  var KINDS = {
+    cover: { title: "ใบปะหน้ากระเป๋าแบบทดสอบ" },
+    slip: { title: "ใบนำส่งกองกลาง" }
+  };
+  var NO_DOWNLOAD = "หน้านี้ดาวน์โหลด PDF ไม่ได้ กด “ดูภาพสำหรับพิมพ์” แล้วบันทึกภาพไปพิมพ์แทน";
+  var PRINT_IMG_K = 150 / 25.4;   // 150 dpi page images
+
+  var fontsReady = (function () {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var sample = "กขคงจ ABC 0123456789";
+    var load = Promise.all([
+      document.fonts.load("400 40px Sarabun", sample),
+      document.fonts.load("700 40px Sarabun", sample)
+    ]).catch(function () {});
+    return Promise.race([load, new Promise(function (r) { setTimeout(r, 4000); })]);
+  })();
+
+  function spacedRange(a, b) { return pad3(a) + " - " + pad3(b); }
+  function timeText(t) { return t.replace("–", " - ") + " น."; }
+  function minutesOf(t) {
+    var m = t.match(/(\d{2})\.(\d{2})\D+(\d{2})\.(\d{2})/);
+    return m ? (Number(m[3]) * 60 + Number(m[4])) - (Number(m[1]) * 60 + Number(m[2])) : 0;
+  }
+
+  // One bag per exam room in room order, then the spare bags.
+  function bagsFor(s, spares) {
+    var bags = s.rooms.map(function (r, i) {
+      var classes = [];
+      r.rows.forEach(function (row) { if (classes.indexOf(row.seg.cls) === -1) classes.push(row.seg.cls); });
+      return {
+        seq: i + 1, room: r.room, roomNo: r.roomNo, building: r.roomNo.charAt(0),
+        classText: classes.map(function (c) { return "ม." + c; }).join(" , "),
+        count: String(r.total), range: spacedRange(r.start, r.end)
+      };
+    });
+    for (var i = 0; i < spares; i++) {
+      bags.push({ seq: bags.length + 1, spare: true, roomNo: "สำรอง", building: "", classText: "ม.6", count: "", range: "" });
+    }
+    return bags;
+  }
+
+  // Delivery slips list up to 8 exam-room bags each; spare bags are counted on the last slip.
+  function slipPages(s, spares) {
+    var rooms = bagsFor(s, 0), pages = [];
+    for (var i = 0; i < rooms.length; i += SLIP_ROWS) pages.push({ no: pages.length + 1, rooms: rooms.slice(i, i + SLIP_ROWS), spares: 0 });
+    pages[pages.length - 1].spares = spares;
+    return pages;
+  }
+
+  function pagesFor(s, kind, spares) {
+    return kind === "cover"
+      ? bagsFor(s, spares).map(function (b) { return { kind: "cover", bag: b }; })
+      : slipPages(s, spares).map(function (p) { return { kind: "slip", slip: p }; });
+  }
+
+  function Painter(ctx, k) { this.ctx = ctx; this.k = k; this.ratio = {}; }
+  Painter.prototype.font = function (w, px) { this.ctx.font = w + " " + px.toFixed(2) + "px " + PDF_FONT; };
+  // font size (px) whose digit height is `mm`
+  Painter.prototype.cap = function (w, mm) {
+    if (!this.ratio[w]) {
+      this.font(w, 100);
+      this.ratio[w] = (this.ctx.measureText("1").actualBoundingBoxAscent || 70) / 100;
+    }
+    return mm * this.k / this.ratio[w];
+  };
+  // font size (px) at which `text` is `mm` wide
+  Painter.prototype.fit = function (w, text, mm) {
+    this.font(w, 100);
+    return mm * this.k * 100 / this.ctx.measureText(text).width;
+  };
+  Painter.prototype.text = function (str, x, y, w, px, align, maxW) {
+    if (!str) return;
+    var ctx = this.ctx;
+    this.font(w, px);
+    if (maxW) {
+      var tw = ctx.measureText(str).width, mw = maxW * this.k;
+      if (tw > mw) this.font(w, px * mw / tw);
+    }
+    ctx.textAlign = align || "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText(str, x * this.k, y * this.k);
+  };
+  // Thai label centred on its x-height
+  Painter.prototype.mid = function (str, x, cy, w, px, maxW) {
+    this.font(w, px);
+    var xh = this.ctx.measureText("ก").actualBoundingBoxAscent || px * 0.45;
+    this.text(str, x, cy + xh / 2 / this.k, w, px, "center", maxW);
+  };
+  Painter.prototype.rect = function (x, y, w, h) {
+    this.ctx.fillRect(x * this.k, y * this.k, w * this.k, h * this.k);
+  };
+
+  // Landscape 297 × 210 mm
+  function drawCover(ctx, k, s, bag) {
+    var p = new Painter(ctx, k), d = DAYS[s.day];
+    var z = {
+      title: p.fit(700, DOC.school, 114.8), sub: p.cap(400, 4.9),
+      labL: p.fit(400, "รายวิชา", 19.0), labR: p.fit(400, "หมายเลขห้องสอบ", 37.8),
+      val: p.cap(700, 7.8), bag: p.cap(700, 10.6), room: p.cap(700, 11.0),
+      bld: p.cap(700, 7.7), cnt: p.cap(700, 8.6), rng: p.cap(700, 8.4)
+    };
+    var L = 13, LW = 178, C = 244.75;
+    p.text(DOC.school, 148.5, 21.4, 700, z.title, "center");
+    p.text(DOC.exam, 148.5, 33.3, 400, z.sub, "center", 270);
+    p.rect(12.7, 38.9, 271.5, 0.5);
+
+    p.text("รายวิชา", L, 51.1, 400, z.labL);
+    p.text(s.code, L, 63.8, 700, z.val, "left", LW);
+    p.text(s.name, L, 77.5, 700, z.val, "left", LW);
+    p.text("ระดับ/ห้อง", L, 103.0, 400, z.labL);
+    p.text(bag.classText, L, 116.0, 700, z.val, "left", LW);
+    p.text("สอบวันที่", L, 140.5, 400, z.labL);
+    p.text(d.full, L, 153.9, 700, z.val, "left", LW);
+    p.text("เวลาสอบ", L, 179.6, 400, z.labL);
+    p.text(timeText(s.time), L, 192.0, 700, z.val, "left", 110);
+    p.text("เวลาในการสอบ", 128.3, 179.6, 400, z.labL);
+    p.text(minutesOf(s.time) + " นาที", 128.3, 192.0, 700, z.val, "left", 64);
+
+    p.rect(196.6, 44.7, 0.5, 149.9);
+    p.rect(205.0, 44.7, 79.5, 0.5);
+    p.rect(205.0, 73.2, 79.5, 0.5);
+    p.rect(205.0, 44.7, 0.5, 29.0);
+    p.rect(284.0, 44.7, 0.5, 29.0);
+    p.text("ลำดับกระเป๋าแบบทดสอบ", C, 52.6, 400, z.labR, "center", 75);
+    p.text(String(bag.seq), C, 68.8, 700, z.bag, "center");
+    p.text("หมายเลขห้องสอบ", C, 89.2, 400, z.labR, "center");
+    p.text(bag.roomNo, C, 105.2, 700, z.room, "center", 80);
+    p.text("อาคาร", C, 122.2, 400, z.labR, "center");
+    p.text(bag.building, C, 133.9, 700, z.bld, "center");
+    p.text("จำนวน (ฉบับ)", C, 150.2, 400, z.labR, "center");
+    p.text(bag.count, C, 163.3, 700, z.cnt, "center");
+    p.text("หมายเลขแบบทดสอบ", C, 180.1, 400, z.labR, "center");
+    p.text(bag.range, C, 192.8, 700, z.rng, "center", 80);
+  }
+
+  // Portrait 210 × 297 mm
+  function drawSlip(ctx, k, s, page) {
+    var p = new Painter(ctx, k), d = DAYS[s.day];
+    var z = {
+      title: p.fit(700, DOC.school, 109.3), sub: p.cap(400, 4.5),
+      doc: p.fit(700, "ใบนำส่งกองกลาง (1)", 73.7), lab: p.fit(400, "รายวิชา", 17.5),
+      val: p.cap(700, 6.4), th: p.fit(400, "เลขห้องสอบ", 26.6),
+      tdB: p.cap(700, 4.6), tdR: p.cap(400, 4.6),
+      ct: p.fit(400, "สำรอง", 15.5), ctNum: p.cap(700, 8.9)
+    };
+    var L = 13, R = 131.6, T = 0.45;
+    p.text(DOC.school, 105, 21.8, 700, z.title, "center");
+    p.text(DOC.exam, 105, 31.9, 400, z.sub, "center", 184);
+    p.text(KINDS.slip.title + " (" + page.no + ")", 105, 43.3, 700, z.doc, "center");
+    p.rect(12.7, 50.0, 184.7, 0.35);
+
+    p.text("กองกลาง", L, 61.0, 400, z.lab);
+    p.text("หมายเลขห้องกองกลาง", R, 61.0, 400, z.lab);
+    p.text(DOC.hubName, L, 71.4, 700, z.val, "left", 114);
+    p.text(DOC.hubRoom, R, 71.4, 700, z.val, "left", 64);
+    p.text("รายวิชา", L, 86.1, 400, z.lab);
+    p.text(s.code, L, 96.8, 700, z.val, "left", 184);
+    p.text(s.name, L, 108.0, 700, z.val, "left", 184);
+    p.text("สอบวันที่", L, 121.4, 400, z.lab);
+    p.text(d.full, L, 133.1, 700, z.val, "left", 184);
+    p.text("เวลาสอบ", L, 148.1, 400, z.lab);
+    p.text("เวลาในการสอบ", R, 148.1, 400, z.lab);
+    p.text(timeText(s.time), L, 158.5, 700, z.val, "left", 114);
+    p.text(minutesOf(s.time) + " นาที", R, 158.5, 700, z.val, "left", 64);
+    p.text("ห้องสอบที่นำส่ง", L, 173.0, 400, z.lab);
+
+    var TOP = 175.5, HEAD = 185.4, ROW = 11.4;
+    [[12.7, 42.0, 76.5, 103.0], [107.2, 136.2, 170.6, 197.4]].forEach(function (xs, ti) {
+      var items = page.rooms.slice(ti * 4, ti * 4 + 4);
+      if (!items.length) return;
+      var bottom = HEAD + ROW * items.length;
+      [TOP, HEAD].concat(items.map(function (_, i) { return HEAD + ROW * (i + 1); })).forEach(function (y) {
+        p.rect(xs[0] - T / 2, y - T / 2, xs[3] - xs[0] + T, T);
+      });
+      xs.forEach(function (x) { p.rect(x - T / 2, TOP - T / 2, T, bottom - TOP + T); });
+      ["ห้องสอบที่", "เลขห้องสอบ", "กระเป๋าที่"].forEach(function (h, c) {
+        p.mid(h, (xs[c] + xs[c + 1]) / 2, (TOP + HEAD) / 2, 400, z.th, xs[c + 1] - xs[c] - 2);
+      });
+      items.forEach(function (b, i) {
+        var base = HEAD + ROW * i + ROW / 2 + 4.6 / 2;
+        p.text(String(b.room), (xs[0] + xs[1]) / 2, base, 700, z.tdB, "center");
+        p.text(b.roomNo, (xs[1] + xs[2]) / 2, base, 700, z.tdB, "center");
+        p.text(String(b.seq), (xs[2] + xs[3]) / 2, base, 400, z.tdR, "center");
+      });
+    });
+
+    var X0 = 12.7, XM = 86.55, XS = 160.4, X1 = 197.4, Y0 = 238.5, Y1 = 250.85, Y2 = 263.0, Y3 = 280.55;
+    p.rect(X0 - T / 2, Y0 - T / 2, X1 - X0 + T, T);
+    p.rect(X0 - T / 2, Y1 - T / 2, XS - X0 + T, T);
+    p.rect(X0 - T / 2, Y2 - T / 2, X1 - X0 + T, T);
+    p.rect(X0 - T / 2, Y3 - T / 2, X1 - X0 + T, T);
+    p.rect(X0 - T / 2, Y0 - T / 2, T, Y3 - Y0 + T);
+    p.rect(XS - T / 2, Y0 - T / 2, T, Y3 - Y0 + T);
+    p.rect(X1 - T / 2, Y0 - T / 2, T, Y3 - Y0 + T);
+    p.rect(XM - T / 2, Y1 - T / 2, T, Y3 - Y1 + T);
+    p.mid("จำนวนกระเป๋า", (X0 + XS) / 2, (Y0 + Y1) / 2, 400, z.ct);
+    p.mid("แบบทดสอบ", (X0 + XM) / 2, (Y1 + Y2) / 2, 400, z.ct);
+    p.mid("สำรอง", (XM + XS) / 2, (Y1 + Y2) / 2, 400, z.ct);
+    p.mid("รวม", (XS + X1) / 2, (Y0 + Y2) / 2, 400, z.ct);
+    var numBase = (Y2 + Y3) / 2 + 8.9 / 2;
+    p.text(String(page.rooms.length), (X0 + XM) / 2, numBase, 700, z.ctNum, "center");
+    p.text(String(page.spares), (XM + XS) / 2, numBase, 700, z.ctNum, "center");
+    p.text(String(page.rooms.length + page.spares), (XS + X1) / 2, numBase, 700, z.ctNum, "center");
+  }
+
+  // Covers go into the PDF turned onto A4 portrait, as in the sample; previews stay landscape.
+  function paint(canvas, k, s, pg, forPdf) {
+    var cover = pg.kind === "cover", turned = cover && forPdf;
+    var landscape = cover && !forPdf;
+    canvas.width = Math.round((landscape ? 297 : 210) * k);
+    canvas.height = Math.round((landscape ? 210 : 297) * k);
+    var ctx = canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#000000";
+    if (turned) { ctx.translate(0, canvas.height); ctx.rotate(-Math.PI / 2); }
+    if (cover) drawCover(ctx, k, s, pg.bag); else drawSlip(ctx, k, s, pg.slip);
+  }
+
+  function canvasJpeg(canvas) {
+    return new Promise(function (resolve, reject) {
+      canvas.toBlob(function (b) {
+        if (!b) { reject(new Error("toBlob")); return; }
+        b.arrayBuffer().then(function (ab) { resolve(new Uint8Array(ab)); }, reject);
+      }, "image/jpeg", 0.86);
+    });
+  }
+
+  // Minimal PDF 1.4 writer: one full-page JPEG per A4 page.
+  function buildPdf(images, title) {
+    var enc = new TextEncoder(), parts = [], pos = 0, offs = [];
+    function put(x) { var b = typeof x === "string" ? enc.encode(x) : x; parts.push(b); pos += b.length; }
+    function begin(n) { offs[n] = pos; put(n + " 0 obj\n"); }
+    var W = "595.28", H = "841.89", n = images.length;
+    put(new Uint8Array([37, 80, 68, 70, 45, 49, 46, 52, 10, 37, 226, 227, 207, 211, 10]));
+    begin(1); put("<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
+    begin(2); put("<< /Type /Pages /Count " + n + " /Kids [" + images.map(function (_, i) { return (4 + i * 3) + " 0 R"; }).join(" ") + "] >>\nendobj\n");
+    var hex = "FEFF";
+    for (var c = 0; c < title.length; c++) hex += ("000" + title.charCodeAt(c).toString(16)).slice(-4).toUpperCase();
+    begin(3); put("<< /Title <" + hex + "> >>\nendobj\n");
+    images.forEach(function (img, i) {
+      var pg = 4 + i * 3, cs = "q " + W + " 0 0 " + H + " 0 0 cm /Im0 Do Q";
+      begin(pg);
+      put("<< /Type /Page /Parent 2 0 R /MediaBox [0 0 " + W + " " + H + "] /Resources << /XObject << /Im0 " + (pg + 2) + " 0 R >> >> /Contents " + (pg + 1) + " 0 R >>\nendobj\n");
+      begin(pg + 1);
+      put("<< /Length " + cs.length + " >>\nstream\n" + cs + "\nendstream\nendobj\n");
+      begin(pg + 2);
+      put("<< /Type /XObject /Subtype /Image /Width " + img.w + " /Height " + img.h + " /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length " + img.bytes.length + " >>\nstream\n");
+      put(img.bytes);
+      put("\nendstream\nendobj\n");
+    });
+    var size = 4 + n * 3, xref = pos, x = "xref\n0 " + size + "\n0000000000 65535 f \n";
+    for (var o = 1; o < size; o++) x += ("000000000" + offs[o]).slice(-10) + " 00000 n \n";
+    put(x + "trailer\n<< /Size " + size + " /Root 1 0 R /Info 3 0 R >>\nstartxref\n" + xref + "\n%%EOF\n");
+    return new Blob(parts, { type: "application/pdf" });
+  }
+
+  function fileTitle(s, kind) { return KINDS[kind].title + " - " + s.code + " " + s.name; }
+
+  function makePdf(s, kind, spares, onProgress) {
+    var pages = pagesFor(s, kind, spares), canvas = document.createElement("canvas"), out = [], i = 0;
+    function next() {
+      if (i >= pages.length) return buildPdf(out, fileTitle(s, kind));
+      paint(canvas, PDF_K, s, pages[i], true);
+      if (onProgress) onProgress(i + 1, pages.length);
+      return canvasJpeg(canvas).then(function (bytes) {
+        out.push({ bytes: bytes, w: canvas.width, h: canvas.height });
+        i++;
+        return new Promise(function (r) { setTimeout(r, 0); }).then(next);
+      });
+    }
+    return fontsReady.then(next);
+  }
+
+  // ---------- print section UI ----------
+  var print = { spares: 1, thumbs: {}, last: null, busy: false };
+  try {
+    var savedSpares = localStorage.getItem("examSpareBags");
+    if (savedSpares !== null && /^[0-2]$/.test(savedSpares)) print.spares = Number(savedSpares);
+  } catch (e) {}
+
+  function printSection(s) {
+    var bags = bagsFor(s, print.spares), slips = slipPages(s, print.spares);
+    var spareChips = [0, 1, 2].map(function (n) {
+      return '<button type="button" class="filter" data-spares="' + n + '" aria-pressed="' + (print.spares === n) + '">' + n + " ใบ</button>";
+    }).join("");
+    return '<section class="print" aria-labelledby="printTitle">' +
+      '<div class="print-head"><h3 id="printTitle">พิมพ์เอกสาร</h3>' +
+      '<div class="spare" role="group" aria-label="จำนวนกระเป๋าสำรอง"><span class="spare-label">กระเป๋าสำรอง</span>' + spareChips + "</div></div>" +
+      '<div class="docs">' +
+        docCard("cover", bags.length + " หน้า · หน้าละ 1 กระเป๋า ห้องสอบ " + s.rooms.length + " ห้อง" + (print.spares ? " และสำรอง " + print.spares + " ใบ" : "")) +
+        docCard("slip", slips.length + " หน้า · " + DOC.hubName + " ห้อง " + DOC.hubRoom + " · หน้าละไม่เกิน " + SLIP_ROWS + " ห้องสอบ") +
+      "</div>" +
+      '<p class="print-status" id="printStatus" role="status"></p></section>';
+  }
+
+  function docCard(kind, meta) {
+    var pdf = downloadsReady === false ? "" : '<button type="button" class="btn primary" data-pdf="' + kind + '">ดาวน์โหลด PDF</button>';
+    var images = '<button type="button" class="btn' + (pdf ? "" : " primary") + '" data-images="' + kind + '">ดูภาพสำหรับพิมพ์</button>';
+    return '<article class="doc"><div><h4>' + KINDS[kind].title + "</h4><p>" + esc(meta) + "</p></div>" +
+      '<div class="thumbs" data-thumbs="' + kind + '"><span class="thumb-wait">กำลังเตรียมตัวอย่าง…</span></div>' +
+      '<div class="doc-actions">' + pdf + images + "</div></article>";
+  }
+
+  function setPrintStatus(t) {
+    var node = document.getElementById("printStatus");
+    if (node) node.textContent = t;
+  }
+
+  function thumbsFor(s, kind) {
+    var key = s.id + "|" + kind + "|" + print.spares;
+    if (!print.thumbs[key]) {
+      var c = document.createElement("canvas");
+      print.thumbs[key] = pagesFor(s, kind, print.spares).map(function (pg) {
+        paint(c, THUMB_K, s, pg, false);
+        return c.toDataURL("image/jpeg", 0.85);
+      });
+    }
+    return print.thumbs[key];
+  }
+
+  function renderThumbs(s) {
+    fontsReady.then(function () {
+      if (state.selected !== s.id) return;
+      ["cover", "slip"].forEach(function (kind) {
+        var box = el.detail.querySelector('[data-thumbs="' + kind + '"]');
+        if (!box) return;
+        box.innerHTML = thumbsFor(s, kind).map(function (src, i) {
+          return '<button type="button" class="thumb" data-thumb="' + kind + '" data-page="' + i + '" aria-label="ดูหน้า ' + (i + 1) + '">' +
+            '<img alt="" src="' + src + '"></button>';
+        }).join("");
+      });
+    });
+  }
+
+  // Inside claude.ai the viewer hands files over through the downloads capability.
+  // Opened as an ordinary web page, the browser's own download is used instead.
+  var EMBEDDED = !!(window.claude && typeof window.claude.use === "function");
+  var browserDownloads = {
+    save: function (req) {
+      var url = URL.createObjectURL(req.data);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = req.filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+      return Promise.resolve({ status: "saved" });
+    }
+  };
+  var downloadsP = EMBEDDED
+    ? window.claude.use("downloads").catch(function () { return null; })
+    : Promise.resolve(browserDownloads);
+  var downloadsReady = null;
+  downloadsP.then(function (dl) {
+    downloadsReady = !!dl;
+    if (!dl) renderDetail();
+  });
+
+  function downloadError(err) {
+    var code = err && err.code;
+    if (code === "declined") return "ยกเลิกการบันทึกไฟล์แล้ว";
+    if (code === "rate_limited") return "มีหน้าต่างบันทึกไฟล์เปิดค้างอยู่ กรุณาปิดแล้วกดดาวน์โหลดอีกครั้ง";
+    if (code === "too_large") return "ไฟล์ใหญ่เกินกว่าที่บันทึกได้ในหน้านี้";
+    return NO_DOWNLOAD;
+  }
+
+  function downloadPdf(s, kind, btn) {
+    if (print.busy) return;
+    print.busy = true;
+    btn.disabled = true;
+    var key = s.id + "|" + kind + "|" + print.spares, name = fileTitle(s, kind) + ".pdf";
+    downloadsP.then(function (dl) {
+      if (!dl) throw { code: "unavailable" };
+      var blobP = print.last && print.last.key === key
+        ? Promise.resolve(print.last.blob)
+        : makePdf(s, kind, print.spares, function (i, n) { setPrintStatus("กำลังสร้าง PDF หน้า " + i + " จาก " + n + "…"); })
+            .then(function (blob) { print.last = { key: key, blob: blob }; return blob; });
+      return blobP.then(function (blob) {
+        setPrintStatus("กรุณายืนยันการบันทึกไฟล์ " + name);
+        return dl.save({ filename: name, data: blob });
+      });
+    }).then(function () {
+      setPrintStatus("บันทึกไฟล์ " + name + " แล้ว");
+    }, function (err) {
+      setPrintStatus(downloadError(err));
+    }).then(function () {
+      print.busy = false;
+      var b = el.detail.querySelector('[data-pdf="' + kind + '"]');
+      if (b) b.disabled = false;
+    });
+  }
+
+  // Page images for printing: plain <img> elements, so every browser lets the viewer
+  // save or copy them (right-click on a computer, long-press on a phone).
+  var viewer = document.createElement("div");
+  viewer.className = "viewer";
+  viewer.id = "viewer";
+  viewer.hidden = true;
+  viewer.setAttribute("role", "dialog");
+  viewer.setAttribute("aria-modal", "true");
+  viewer.setAttribute("aria-labelledby", "viewerTitle");
+  viewer.innerHTML = '<div class="viewer-bar"><div class="viewer-head"><b id="viewerTitle"></b>' +
+    '<span class="viewer-hint">คอมพิวเตอร์: คลิกขวาที่ภาพ แล้วเลือก “บันทึกรูปภาพ” หรือ “คัดลอกรูปภาพ” · มือถือ: กดค้างที่ภาพ แล้วเลือก “บันทึกรูปภาพ” แล้วพิมพ์จากแอปรูปภาพลงกระดาษ A4</span></div>' +
+    '<button type="button" class="btn" id="viewerClose">ปิด</button></div>' +
+    '<div class="viewer-body" id="viewerBody"></div>';
+  document.body.appendChild(viewer);
+  var view = { token: 0, back: null, key: null, urls: [] };
+
+  function pageNote(pg) {
+    if (pg.kind === "slip") return "ใบนำส่งกองกลาง (" + pg.slip.no + ")";
+    return pg.bag.spare ? "กระเป๋าที่ " + pg.bag.seq + " · สำรอง" : "กระเป๋าที่ " + pg.bag.seq + " · ห้องสอบ " + pg.bag.room + " (" + pg.bag.roomNo + ")";
+  }
+
+  function showImages(s, kind, start) {
+    var pages = pagesFor(s, kind, print.spares), key = s.id + "|" + kind + "|" + print.spares, token = ++view.token;
+    if (view.key !== key) { view.key = key; view.urls = []; }
+    view.back = document.activeElement;
+    document.getElementById("viewerTitle").textContent = KINDS[kind].title + " · " + s.code + " " + s.name + " · " + pages.length + " หน้า";
+    var body = document.getElementById("viewerBody");
+    body.innerHTML = pages.map(function (pg, i) {
+      return '<figure class="sheet' + (pg.kind === "cover" ? " land" : "") + '">' +
+        '<img alt="' + esc(KINDS[kind].title + " หน้า " + (i + 1)) + '">' +
+        "<figcaption>หน้า " + (i + 1) + " จาก " + pages.length + " · " + esc(pageNote(pg)) + "</figcaption></figure>";
+    }).join("");
+    viewer.hidden = false;
+    document.getElementById("viewerClose").focus();
+    var figs = body.querySelectorAll(".sheet");
+    body.scrollTop = 0;
+    if (start && figs[start]) figs[start].scrollIntoView({ block: "start" });
+    var order = [], i;
+    for (i = start; i < pages.length; i++) order.push(i);
+    for (i = 0; i < start; i++) order.push(i);
+    var canvas = document.createElement("canvas");
+    function step() {
+      if (token !== view.token || viewer.hidden || !order.length) return;
+      var n = order.shift();
+      if (!view.urls[n]) {
+        paint(canvas, PRINT_IMG_K, s, pages[n], false);
+        view.urls[n] = canvas.toDataURL("image/jpeg", 0.9);
+      }
+      figs[n].querySelector("img").src = view.urls[n];
+      setTimeout(step, 0);
+    }
+    fontsReady.then(step);
+  }
+  function closeViewer() {
+    view.token++;
+    viewer.hidden = true;
+    if (view.back && view.back.focus) view.back.focus();
+  }
+  document.getElementById("viewerClose").addEventListener("click", closeViewer);
+  viewer.addEventListener("click", function (e) { if (e.target === viewer || e.target.id === "viewerBody") closeViewer(); });
+  document.addEventListener("keydown", function (e) {
+    if (!viewer.hidden && e.key === "Escape") closeViewer();
+  });
+
+  function currentSubject() {
+    return SUBJECTS.find(function (x) { return x.id === state.selected; }) || SUBJECTS[0];
+  }
+
+  function subjectText(s) {
+    var d = DAYS[s.day];
+    var lines = [
+      s.code + " " + s.name,
+      d.full + " เวลา " + s.time + " น.",
+      "หมายเลขแบบทดสอบ " + range(1, s.total) + " (" + s.total + " ชุด, " + s.rooms.length + " ห้องสอบ)",
+      ""
+    ];
+    s.rooms.forEach(function (r) {
+      var parts = r.rows.map(function (row) {
+        return row.seg.cls + " เลขที่ " + row.seg.from + "–" + row.seg.to + (r.rows.length > 1 ? " (" + range(row.start, row.end) + ")" : "");
+      });
+      lines.push("ห้องสอบ " + r.room + " (" + r.roomNo + "): " + range(r.start, r.end) + " · " + r.total + " ชุด · " + parts.join(", "));
+    });
+    return lines.join("\n");
+  }
+
+  function copySubject(s) {
+    var text = subjectText(s);
+    var status = document.getElementById("copyStatus");
+    function fallback() {
+      status.textContent = "คัดลอกอัตโนมัติไม่ได้ กรุณาคัดลอกจากกล่องด้านล่าง";
+      var ta = el.detail.querySelector(".copy-fallback");
+      if (!ta) {
+        ta = document.createElement("textarea");
+        ta.className = "copy-fallback";
+        ta.id = "copyText";
+        ta.readOnly = true;
+        el.detail.querySelector(".stats").before(ta);
+      }
+      ta.value = text;
+      ta.focus();
+      ta.select();
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = "คัดลอกแล้ว วางในแชตหรือเอกสารได้เลย";
+      }, fallback);
+    } catch (e) { fallback(); }
+  }
+
+  // ---------- events ----------
+  function select(id, scroll) {
+    if (!SUBJECTS.some(function (s) { return s.id === id; })) return;
+    state.selected = id;
+    if (location.hash !== "#" + id) {
+      try { history.replaceState(null, "", "#" + id); } catch (e) { location.hash = id; }
+    }
+    renderList();
+    renderDetail();
+    if (scroll && window.matchMedia("(max-width: 900px)").matches) {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el.detail.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+  }
+
+  function onFilterChange() {
+    el.clear.hidden = !state.q;
+    var items = filtered();
+    if (items.length === 1 && items[0].id !== state.selected) {
+      state.selected = items[0].id;
+      try { history.replaceState(null, "", "#" + state.selected); } catch (e) {}
+    }
+    renderList();
+    renderDetail();
+  }
+
+  el.q.addEventListener("input", function () {
+    state.q = el.q.value;
+    onFilterChange();
+  });
+  el.q.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      var items = filtered();
+      if (items.length) select(items[0].id, true);
+    } else if (e.key === "Escape" && el.q.value) {
+      el.q.value = "";
+      state.q = "";
+      onFilterChange();
+    }
+  });
+  el.clear.addEventListener("click", function () {
+    el.q.value = "";
+    state.q = "";
+    onFilterChange();
+    el.q.focus();
+  });
+  el.days.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-day]");
+    if (!b) return;
+    state.day = Number(b.getAttribute("data-day"));
+    renderDayChips();
+    onFilterChange();
+  });
+  el.group.addEventListener("change", function () {
+    state.group = el.group.value;
+    onFilterChange();
+  });
+  el.list.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-id]");
+    if (b) select(b.getAttribute("data-id"), true);
+  });
+  el.detail.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-pdf], [data-spares], [data-thumb], [data-images]");
+    if (!t) return;
+    var s = currentSubject();
+    if (t.hasAttribute("data-spares")) {
+      print.spares = Number(t.getAttribute("data-spares"));
+      try { localStorage.setItem("examSpareBags", String(print.spares)); } catch (err) {}
+      renderDetail();
+      var again = el.detail.querySelector('[data-spares="' + print.spares + '"]');
+      if (again) again.focus();
+    } else if (t.hasAttribute("data-pdf")) {
+      downloadPdf(s, t.getAttribute("data-pdf"), t);
+    } else if (t.hasAttribute("data-images")) {
+      showImages(s, t.getAttribute("data-images"), 0);
+    } else {
+      showImages(s, t.getAttribute("data-thumb"), Number(t.getAttribute("data-page")));
+    }
+  });
+  window.addEventListener("hashchange", function () {
+    var id = location.hash.slice(1);
+    if (id && id !== state.selected) select(id, false);
+  });
+
+  // ---------- start ----------
+  var initial = location.hash.slice(1);
+  if (SUBJECTS.some(function (s) { return s.id === initial; })) state.selected = initial;
+  renderDayChips();
+  renderGroupSelect();
+  renderList();
+  renderDetail();
+
+  window.__EXAM_DATA__ = { SUBJECTS: SUBJECTS, subjectText: subjectText, makePdf: makePdf, pagesFor: pagesFor, paint: paint };
+})();
+</script>
+
+</body>
+</html>
