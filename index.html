@@ -471,7 +471,17 @@ select#group {
 .viewer-head { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .viewer-head b { font-size: 16px; line-height: 1.45; }
 .viewer-hint { font-size: 14px; line-height: 1.5; opacity: 0.9; }
-.viewer-bar .btn { flex: 0 0 auto; min-height: 40px; padding: 6px 16px; }
+.viewer-actions { display: flex; flex: 0 0 auto; gap: 8px; }
+.viewer-actions .btn { min-height: 40px; padding: 6px 16px; }
+.print-sheets { display: none; }
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+  html.print-sheets-on, html.print-sheets-on body { margin: 0 !important; padding: 0 !important; background: #ffffff !important; }
+  html.print-sheets-on body > *:not(.print-sheets) { display: none !important; }
+  html.print-sheets-on .print-sheets { display: block !important; }
+  .print-sheets img { display: block; width: 99.6%; height: auto; margin: 0 auto; }
+  .print-sheets img + img { break-before: page; page-break-before: always; }
+}
 .viewer-body {
   flex: 1;
   min-height: 0;
@@ -1169,11 +1179,16 @@ select#group {
   }
 
   function docCard(kind, meta) {
-    var pdf = downloadsReady === false ? "" : '<button type="button" class="btn primary" data-pdf="' + kind + '">ดาวน์โหลด PDF</button>';
-    var images = '<button type="button" class="btn' + (pdf ? "" : " primary") + '" data-images="' + kind + '">ดูภาพสำหรับพิมพ์</button>';
+    var buttons = [];
+    function add(attr, label) {
+      buttons.push('<button type="button" class="btn' + (buttons.length ? "" : " primary") + '" ' + attr + '="' + kind + '">' + label + "</button>");
+    }
+    if (CAN_PRINT) add("data-images", "ดูตัวอย่างและพิมพ์");
+    if (downloadsReady !== false) add("data-pdf", "ดาวน์โหลด PDF");
+    if (!CAN_PRINT) add("data-images", "ดูภาพสำหรับพิมพ์");
     return '<article class="doc"><div><h4>' + KINDS[kind].title + "</h4><p>" + esc(meta) + "</p></div>" +
       '<div class="thumbs" data-thumbs="' + kind + '"><span class="thumb-wait">กำลังเตรียมตัวอย่าง…</span></div>' +
-      '<div class="doc-actions">' + pdf + images + "</div></article>";
+      '<div class="doc-actions">' + buttons.join("") + "</div></article>";
   }
 
   function setPrintStatus(t) {
@@ -1226,6 +1241,8 @@ select#group {
   var downloadsP = EMBEDDED
     ? window.claude.use("downloads").catch(function () { return null; })
     : Promise.resolve(browserDownloads);
+  // The browser's print dialog only opens on an ordinary web page; claude.ai's frame refuses it.
+  var CAN_PRINT = !EMBEDDED && typeof window.print === "function";
   var downloadsReady = null;
   downloadsP.then(function (dl) {
     downloadsReady = !!dl;
@@ -1276,11 +1293,62 @@ select#group {
   viewer.setAttribute("aria-modal", "true");
   viewer.setAttribute("aria-labelledby", "viewerTitle");
   viewer.innerHTML = '<div class="viewer-bar"><div class="viewer-head"><b id="viewerTitle"></b>' +
-    '<span class="viewer-hint">คอมพิวเตอร์: คลิกขวาที่ภาพ แล้วเลือก “บันทึกรูปภาพ” หรือ “คัดลอกรูปภาพ” · มือถือ: กดค้างที่ภาพ แล้วเลือก “บันทึกรูปภาพ” แล้วพิมพ์จากแอปรูปภาพลงกระดาษ A4</span></div>' +
-    '<button type="button" class="btn" id="viewerClose">ปิด</button></div>' +
+    '<span class="viewer-hint">' + (CAN_PRINT
+      ? "ตรวจดูทุกหน้า แล้วกด “พิมพ์” · ในหน้าต่างพิมพ์ เลือกกระดาษ A4 และปิดหัวกระดาษและท้ายกระดาษ ถ้ามีตัวเลือก"
+      : "คอมพิวเตอร์: คลิกขวาที่ภาพ แล้วเลือก “บันทึกรูปภาพ” หรือ “คัดลอกรูปภาพ” · มือถือ: กดค้างที่ภาพ แล้วเลือก “บันทึกรูปภาพ” แล้วพิมพ์จากแอปรูปภาพลงกระดาษ A4") +
+    "</span></div>" +
+    '<div class="viewer-actions">' +
+    (CAN_PRINT ? '<button type="button" class="btn primary" id="viewerPrint">พิมพ์</button>' : "") +
+    '<button type="button" class="btn" id="viewerClose">ปิด</button></div></div>' +
     '<div class="viewer-body" id="viewerBody"></div>';
   document.body.appendChild(viewer);
-  var view = { token: 0, back: null, key: null, urls: [] };
+  var view = { token: 0, back: null, key: null, urls: [], s: null, kind: null };
+
+  // Print layer: A4 portrait page images (covers turned, as in the PDF), shown only while printing.
+  var sheets = document.createElement("div");
+  sheets.className = "print-sheets";
+  sheets.setAttribute("aria-hidden", "true");
+  document.body.appendChild(sheets);
+  var printing = false;
+
+  function printDoc() {
+    if (printing || !view.s) return;
+    printing = true;
+    var btn = document.getElementById("viewerPrint");
+    btn.disabled = true;
+    var s = view.s, pages = pagesFor(s, view.kind, print.spares), canvas = document.createElement("canvas"), imgs = [], i = 0;
+    function done() {
+      printing = false;
+      btn.disabled = false;
+      btn.textContent = "พิมพ์";
+    }
+    function step() {
+      if (i < pages.length) {
+        btn.textContent = "กำลังเตรียม " + (i + 1) + "/" + pages.length;
+        paint(canvas, PRINT_IMG_K, s, pages[i], true);
+        var img = new Image();
+        img.alt = "";
+        img.src = canvas.toDataURL("image/jpeg", 0.9);
+        imgs.push(img);
+        i++;
+        setTimeout(step, 0);
+        return;
+      }
+      sheets.innerHTML = "";
+      imgs.forEach(function (img) { sheets.appendChild(img); });
+      Promise.all(imgs.map(function (img) { return img.decode ? img.decode().catch(function () {}) : null; })).then(function () {
+        document.documentElement.classList.add("print-sheets-on");
+        done();
+        window.print();
+      }, done);
+    }
+    fontsReady.then(function () { setTimeout(step, 0); });
+  }
+  window.addEventListener("afterprint", function () {
+    document.documentElement.classList.remove("print-sheets-on");
+    sheets.innerHTML = "";
+  });
+  if (CAN_PRINT) document.getElementById("viewerPrint").addEventListener("click", printDoc);
 
   function pageNote(pg) {
     if (pg.kind === "slip") return "ใบนำส่งกองกลาง (" + pg.slip.no + ")";
@@ -1289,6 +1357,8 @@ select#group {
 
   function showImages(s, kind, start) {
     var pages = pagesFor(s, kind, print.spares), key = s.id + "|" + kind + "|" + print.spares, token = ++view.token;
+    view.s = s;
+    view.kind = kind;
     if (view.key !== key) { view.key = key; view.urls = []; }
     view.back = document.activeElement;
     document.getElementById("viewerTitle").textContent = KINDS[kind].title + " · " + s.code + " " + s.name + " · " + pages.length + " หน้า";
