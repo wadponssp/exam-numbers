@@ -35,6 +35,8 @@
   --paper: #ffffff;
   --scrim: rgba(8, 20, 16, 0.95);
   --on-scrim: #ffffff;
+  --on-brand-line: rgba(255, 255, 255, 0.55);
+  --on-brand-hover: rgba(255, 255, 255, 0.14);
 
   --font: "Sarabun", "Leelawadee UI", "Thonburi", system-ui, sans-serif;
   --radius-sm: 6px;
@@ -127,6 +129,81 @@ a { color: var(--link); }
 }
 .band h1 { font-size: 24px; line-height: 1.25; font-weight: 700; }
 .band p { margin: 0; font-size: 15px; opacity: 0.92; }
+.band-inner:first-child { padding-bottom: 12px; }
+.band-inner.tabs { padding-block: 0 14px; justify-content: flex-start; align-items: center; gap: 8px; }
+.tab {
+  color: var(--on-brand);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--on-brand-line);
+}
+.tab:hover { background: var(--on-brand-hover); }
+.tab[aria-current="page"] { background: var(--on-brand); color: var(--band); border-color: var(--on-brand); }
+
+/* วผ.7 */
+.src { display: flex; flex-direction: column; gap: 8px; }
+.src-line { margin: 0; font-size: 15px; }
+.src-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn.small { min-height: 38px; padding: 4px 14px; font-size: 14px; }
+.paste { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: var(--radius-md); background: var(--tint); }
+.paste textarea, .field input, .abs-row input[type="text"] {
+  font: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+.paste textarea { width: 100%; resize: vertical; }
+.paste input[type="file"] { font: inherit; font-size: 14px; max-width: 100%; }
+.stu {
+  display: grid;
+  grid-template-columns: auto 2.2em minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+}
+.stu:hover { background: var(--tint); }
+.stu.on { background: var(--tint-strong); }
+.stu input { width: 20px; height: 20px; margin: 0; accent-color: var(--accent); }
+.stu .no, .stu .sid { color: var(--muted); font-size: 14px; }
+.stu .no { text-align: right; }
+.cls-tag { font-size: 13px; color: var(--muted); margin-left: 4px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field input { min-height: 44px; }
+.abs-list { display: flex; flex-direction: column; gap: 12px; }
+.abs {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.abs-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.abs-head b { display: block; font-size: 17px; }
+.abs-head span { font-size: 14px; color: var(--muted); }
+.abs-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-size: 15px; }
+.abs-row .reason { display: inline-flex; align-items: center; gap: 8px; }
+.abs-row input[type="text"] { width: 12em; min-height: 40px; }
+.tick { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.tick input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
+.abs-day { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 8px; align-items: start; }
+.day-label { font-size: 15px; font-weight: 600; color: var(--exam-date); padding-top: 6px; }
+.filter.sub { font-size: 14px; min-height: 36px; text-align: left; }
+.filter.sub b { font-weight: 700; }
+.warn { font-size: 14px; color: var(--warn-ink); background: var(--warn-bg); border-radius: var(--radius-sm); padding: 4px 10px; }
+.wp-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.wp-sum { margin: 0; font-size: 16px; }
+.wp-actions .doc-actions .btn { flex: 0 1 auto; }
 
 /* Workspace */
 .wrap {
@@ -526,6 +603,9 @@ select#group {
   .seg { grid-template-columns: 46px minmax(0, 1fr) 46px 84px; gap: 6px; }
   .docs { grid-template-columns: minmax(0, 1fr); }
   .print { padding: 14px 12px; }
+  .abs-day { grid-template-columns: minmax(0, 1fr); }
+  .abs-row input[type="text"] { width: 100%; }
+  .abs-row .reason { width: 100%; }
   .copy-status { text-align: left; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -540,9 +620,13 @@ select#group {
     <h1>หมายเลขแบบทดสอบ ม.6</h1>
     <p>สอบกลางภาค ภาคเรียนที่ 2/2569 · 9, 11 และ 13 พฤศจิกายน 2569</p>
   </div>
+  <nav class="band-inner tabs" aria-label="เลือกหน้า">
+    <a class="tab" id="tabNumbers" href="#">หมายเลขแบบทดสอบ</a>
+    <a class="tab" id="tabWp7" href="#wp7">ขอสอบย้อนหลัง (วผ.7)</a>
+  </nav>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="viewNumbers">
   <aside class="card finder" aria-label="ค้นหาวิชา">
     <div class="finder-top">
       <label class="label" for="q">ค้นหาวิชา</label>
@@ -563,6 +647,1243 @@ select#group {
   <section class="card detail" id="detail" aria-live="polite" tabindex="-1"></section>
 </main>
 
+<main class="wrap" id="viewWp7" hidden>
+  <aside class="card finder" aria-label="เลือกนักเรียนที่ขาดสอบ">
+    <div class="finder-top">
+      <div class="src" id="wpSource"></div>
+      <span class="label">วันที่ขาดสอบ</span>
+      <div class="filters" id="wpDays" role="group" aria-label="วันที่ขาดสอบ"></div>
+      <span class="label">ห้องเรียน</span>
+      <div class="filters" id="wpClasses" role="group" aria-label="ห้องเรียน"></div>
+      <label class="label" for="wpQ">ค้นหานักเรียน</label>
+      <div class="search">
+        <input id="wpQ" type="search" autocomplete="off" placeholder="ชื่อ สกุล หรือเลขประจำตัว">
+      </div>
+      <p class="result-line" id="wpCount" aria-live="polite"></p>
+    </div>
+    <div class="list" id="wpList"></div>
+  </aside>
+  <section class="card detail" id="wpPanel"></section>
+</main>
+
+<script>
+/* QR Code generator for JavaScript. Copyright (c) 2009 Kazuhiko Arase. MIT license. Bundled from qrcode-terminal. */
+var QRLib = (function () {
+  var defs = {}, cache = {};
+  function req(n) { n = n.replace("./", ""); if (!cache[n]) { var m = { exports: {} }; cache[n] = m; defs[n](m, m.exports, req); } return cache[n].exports; }
+  defs["QRMode"] = function (module, exports, require) {
+module.exports = {
+    MODE_NUMBER :       1 << 0,
+    MODE_ALPHA_NUM :    1 << 1,
+    MODE_8BIT_BYTE :    1 << 2,
+    MODE_KANJI :        1 << 3
+};
+
+  };
+  defs["QRErrorCorrectLevel"] = function (module, exports, require) {
+module.exports = {
+	L : 1,
+	M : 0,
+	Q : 3,
+	H : 2
+};
+
+
+  };
+  defs["QRMaskPattern"] = function (module, exports, require) {
+module.exports = {
+	PATTERN000 : 0,
+	PATTERN001 : 1,
+	PATTERN010 : 2,
+	PATTERN011 : 3,
+	PATTERN100 : 4,
+	PATTERN101 : 5,
+	PATTERN110 : 6,
+	PATTERN111 : 7
+};
+
+  };
+  defs["QRMath"] = function (module, exports, require) {
+var QRMath = {
+
+	glog : function(n) {
+	
+		if (n < 1) {
+			throw new Error("glog(" + n + ")");
+		}
+		
+		return QRMath.LOG_TABLE[n];
+	},
+	
+	gexp : function(n) {
+	
+		while (n < 0) {
+			n += 255;
+		}
+	
+		while (n >= 256) {
+			n -= 255;
+		}
+	
+		return QRMath.EXP_TABLE[n];
+	},
+	
+	EXP_TABLE : new Array(256),
+	
+	LOG_TABLE : new Array(256)
+
+};
+	
+for (var i = 0; i < 8; i++) {
+	QRMath.EXP_TABLE[i] = 1 << i;
+}
+for (var i = 8; i < 256; i++) {
+	QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4]
+		^ QRMath.EXP_TABLE[i - 5]
+		^ QRMath.EXP_TABLE[i - 6]
+		^ QRMath.EXP_TABLE[i - 8];
+}
+for (var i = 0; i < 255; i++) {
+	QRMath.LOG_TABLE[QRMath.EXP_TABLE[i] ] = i;
+}
+
+module.exports = QRMath;
+
+  };
+  defs["QRPolynomial"] = function (module, exports, require) {
+var QRMath = require('./QRMath');
+
+function QRPolynomial(num, shift) {
+	if (num.length === undefined) {
+		throw new Error(num.length + "/" + shift);
+	}
+
+	var offset = 0;
+
+	while (offset < num.length && num[offset] === 0) {
+		offset++;
+	}
+
+	this.num = new Array(num.length - offset + shift);
+	for (var i = 0; i < num.length - offset; i++) {
+		this.num[i] = num[i + offset];
+	}
+}
+
+QRPolynomial.prototype = {
+
+	get : function(index) {
+		return this.num[index];
+	},
+	
+	getLength : function() {
+		return this.num.length;
+	},
+	
+	multiply : function(e) {
+	
+		var num = new Array(this.getLength() + e.getLength() - 1);
+	
+		for (var i = 0; i < this.getLength(); i++) {
+			for (var j = 0; j < e.getLength(); j++) {
+				num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i) ) + QRMath.glog(e.get(j) ) );
+			}
+		}
+	
+		return new QRPolynomial(num, 0);
+	},
+	
+	mod : function(e) {
+	
+		if (this.getLength() - e.getLength() < 0) {
+			return this;
+		}
+	
+		var ratio = QRMath.glog(this.get(0) ) - QRMath.glog(e.get(0) );
+	
+		var num = new Array(this.getLength() );
+		
+		for (var i = 0; i < this.getLength(); i++) {
+			num[i] = this.get(i);
+		}
+		
+		for (var x = 0; x < e.getLength(); x++) {
+			num[x] ^= QRMath.gexp(QRMath.glog(e.get(x) ) + ratio);
+		}
+	
+		// recursive call
+		return new QRPolynomial(num, 0).mod(e);
+	}
+};
+
+module.exports = QRPolynomial;
+
+  };
+  defs["QRUtil"] = function (module, exports, require) {
+var QRMode = require('./QRMode');
+var QRPolynomial = require('./QRPolynomial');
+var QRMath = require('./QRMath');
+var QRMaskPattern = require('./QRMaskPattern');
+
+var QRUtil = {
+
+    PATTERN_POSITION_TABLE : [
+        [],
+        [6, 18],
+        [6, 22],
+        [6, 26],
+        [6, 30],
+        [6, 34],
+        [6, 22, 38],
+        [6, 24, 42],
+        [6, 26, 46],
+        [6, 28, 50],
+        [6, 30, 54],        
+        [6, 32, 58],
+        [6, 34, 62],
+        [6, 26, 46, 66],
+        [6, 26, 48, 70],
+        [6, 26, 50, 74],
+        [6, 30, 54, 78],
+        [6, 30, 56, 82],
+        [6, 30, 58, 86],
+        [6, 34, 62, 90],
+        [6, 28, 50, 72, 94],
+        [6, 26, 50, 74, 98],
+        [6, 30, 54, 78, 102],
+        [6, 28, 54, 80, 106],
+        [6, 32, 58, 84, 110],
+        [6, 30, 58, 86, 114],
+        [6, 34, 62, 90, 118],
+        [6, 26, 50, 74, 98, 122],
+        [6, 30, 54, 78, 102, 126],
+        [6, 26, 52, 78, 104, 130],
+        [6, 30, 56, 82, 108, 134],
+        [6, 34, 60, 86, 112, 138],
+        [6, 30, 58, 86, 114, 142],
+        [6, 34, 62, 90, 118, 146],
+        [6, 30, 54, 78, 102, 126, 150],
+        [6, 24, 50, 76, 102, 128, 154],
+        [6, 28, 54, 80, 106, 132, 158],
+        [6, 32, 58, 84, 110, 136, 162],
+        [6, 26, 54, 82, 110, 138, 166],
+        [6, 30, 58, 86, 114, 142, 170]
+    ],
+
+    G15 : (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0),
+    G18 : (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0),
+    G15_MASK : (1 << 14) | (1 << 12) | (1 << 10)    | (1 << 4) | (1 << 1),
+
+    getBCHTypeInfo : function(data) {
+        var d = data << 10;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+            d ^= (QRUtil.G15 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) ) );    
+        }
+        return ( (data << 10) | d) ^ QRUtil.G15_MASK;
+    },
+
+    getBCHTypeNumber : function(data) {
+        var d = data << 12;
+        while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+            d ^= (QRUtil.G18 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) ) );    
+        }
+        return (data << 12) | d;
+    },
+
+    getBCHDigit : function(data) {
+
+        var digit = 0;
+
+        while (data !== 0) {
+            digit++;
+            data >>>= 1;
+        }
+
+        return digit;
+    },
+
+    getPatternPosition : function(typeNumber) {
+        return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+
+    getMask : function(maskPattern, i, j) {
+        
+        switch (maskPattern) {
+            
+        case QRMaskPattern.PATTERN000 : return (i + j) % 2 === 0;
+        case QRMaskPattern.PATTERN001 : return i % 2 === 0;
+        case QRMaskPattern.PATTERN010 : return j % 3 === 0;
+        case QRMaskPattern.PATTERN011 : return (i + j) % 3 === 0;
+        case QRMaskPattern.PATTERN100 : return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 === 0;
+        case QRMaskPattern.PATTERN101 : return (i * j) % 2 + (i * j) % 3 === 0;
+        case QRMaskPattern.PATTERN110 : return ( (i * j) % 2 + (i * j) % 3) % 2 === 0;
+        case QRMaskPattern.PATTERN111 : return ( (i * j) % 3 + (i + j) % 2) % 2 === 0;
+
+        default :
+            throw new Error("bad maskPattern:" + maskPattern);
+        }
+    },
+
+    getErrorCorrectPolynomial : function(errorCorrectLength) {
+
+        var a = new QRPolynomial([1], 0);
+
+        for (var i = 0; i < errorCorrectLength; i++) {
+            a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0) );
+        }
+
+        return a;
+    },
+
+    getLengthInBits : function(mode, type) {
+
+        if (1 <= type && type < 10) {
+
+            // 1 - 9
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 10;
+            case QRMode.MODE_ALPHA_NUM  : return 9;
+            case QRMode.MODE_8BIT_BYTE  : return 8;
+            case QRMode.MODE_KANJI      : return 8;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 27) {
+
+            // 10 - 26
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 12;
+            case QRMode.MODE_ALPHA_NUM  : return 11;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 10;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else if (type < 41) {
+
+            // 27 - 40
+
+            switch(mode) {
+            case QRMode.MODE_NUMBER     : return 14;
+            case QRMode.MODE_ALPHA_NUM  : return 13;
+            case QRMode.MODE_8BIT_BYTE  : return 16;
+            case QRMode.MODE_KANJI      : return 12;
+            default :
+                throw new Error("mode:" + mode);
+            }
+
+        } else {
+            throw new Error("type:" + type);
+        }
+    },
+
+    getLostPoint : function(qrCode) {
+        
+        var moduleCount = qrCode.getModuleCount();
+        var lostPoint = 0;
+        var row = 0; 
+        var col = 0;
+
+        
+        // LEVEL1
+        
+        for (row = 0; row < moduleCount; row++) {
+
+            for (col = 0; col < moduleCount; col++) {
+
+                var sameCount = 0;
+                var dark = qrCode.isDark(row, col);
+
+                for (var r = -1; r <= 1; r++) {
+
+                    if (row + r < 0 || moduleCount <= row + r) {
+                        continue;
+                    }
+
+                    for (var c = -1; c <= 1; c++) {
+
+                        if (col + c < 0 || moduleCount <= col + c) {
+                            continue;
+                        }
+
+                        if (r === 0 && c === 0) {
+                            continue;
+                        }
+
+                        if (dark === qrCode.isDark(row + r, col + c) ) {
+                            sameCount++;
+                        }
+                    }
+                }
+
+                if (sameCount > 5) {
+                    lostPoint += (3 + sameCount - 5);
+                }
+            }
+        }
+
+        // LEVEL2
+
+        for (row = 0; row < moduleCount - 1; row++) {
+            for (col = 0; col < moduleCount - 1; col++) {
+                var count = 0;
+                if (qrCode.isDark(row,     col    ) ) count++;
+                if (qrCode.isDark(row + 1, col    ) ) count++;
+                if (qrCode.isDark(row,     col + 1) ) count++;
+                if (qrCode.isDark(row + 1, col + 1) ) count++;
+                if (count === 0 || count === 4) {
+                    lostPoint += 3;
+                }
+            }
+        }
+
+        // LEVEL3
+
+        for (row = 0; row < moduleCount; row++) {
+            for (col = 0; col < moduleCount - 6; col++) {
+                if (qrCode.isDark(row, col) && 
+                        !qrCode.isDark(row, col + 1) && 
+                         qrCode.isDark(row, col + 2) && 
+                         qrCode.isDark(row, col + 3) && 
+                         qrCode.isDark(row, col + 4) && 
+                        !qrCode.isDark(row, col + 5) && 
+                         qrCode.isDark(row, col + 6) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount - 6; row++) {
+                if (qrCode.isDark(row, col) &&
+                        !qrCode.isDark(row + 1, col) &&
+                         qrCode.isDark(row + 2, col) &&
+                         qrCode.isDark(row + 3, col) &&
+                         qrCode.isDark(row + 4, col) &&
+                        !qrCode.isDark(row + 5, col) &&
+                         qrCode.isDark(row + 6, col) ) {
+                    lostPoint += 40;
+                }
+            }
+        }
+
+        // LEVEL4
+        
+        var darkCount = 0;
+
+        for (col = 0; col < moduleCount; col++) {
+            for (row = 0; row < moduleCount; row++) {
+                if (qrCode.isDark(row, col) ) {
+                    darkCount++;
+                }
+            }
+        }
+        
+        var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+        lostPoint += ratio * 10;
+
+        return lostPoint;       
+    }
+
+};
+
+module.exports = QRUtil;
+
+  };
+  defs["QR8bitByte"] = function (module, exports, require) {
+var QRMode = require('./QRMode');
+
+function QR8bitByte(data) {
+	this.mode = QRMode.MODE_8BIT_BYTE;
+	this.data = data;
+}
+
+QR8bitByte.prototype = {
+
+	getLength : function() {
+		return this.data.length;
+	},
+	
+	write : function(buffer) {
+		for (var i = 0; i < this.data.length; i++) {
+			// not JIS ...
+			buffer.put(this.data.charCodeAt(i), 8);
+		}
+	}
+};
+
+module.exports = QR8bitByte;
+
+  };
+  defs["QRBitBuffer"] = function (module, exports, require) {
+function QRBitBuffer() {
+	this.buffer = [];
+	this.length = 0;
+}
+
+QRBitBuffer.prototype = {
+
+	get : function(index) {
+		var bufIndex = Math.floor(index / 8);
+		return ( (this.buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+	},
+	
+	put : function(num, length) {
+		for (var i = 0; i < length; i++) {
+			this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+		}
+	},
+	
+	getLengthInBits : function() {
+		return this.length;
+	},
+	
+	putBit : function(bit) {
+	
+		var bufIndex = Math.floor(this.length / 8);
+		if (this.buffer.length <= bufIndex) {
+			this.buffer.push(0);
+		}
+	
+		if (bit) {
+			this.buffer[bufIndex] |= (0x80 >>> (this.length % 8) );
+		}
+	
+		this.length++;
+	}
+};
+
+module.exports = QRBitBuffer;
+
+  };
+  defs["QRRSBlock"] = function (module, exports, require) {
+var QRErrorCorrectLevel = require('./QRErrorCorrectLevel');
+
+function QRRSBlock(totalCount, dataCount) {
+	this.totalCount = totalCount;
+	this.dataCount  = dataCount;
+}
+
+QRRSBlock.RS_BLOCK_TABLE = [
+
+	// L
+	// M
+	// Q
+	// H
+
+	// 1
+	[1, 26, 19],
+	[1, 26, 16],
+	[1, 26, 13],
+	[1, 26, 9],
+	
+	// 2
+	[1, 44, 34],
+	[1, 44, 28],
+	[1, 44, 22],
+	[1, 44, 16],
+
+	// 3
+	[1, 70, 55],
+	[1, 70, 44],
+	[2, 35, 17],
+	[2, 35, 13],
+
+	// 4		
+	[1, 100, 80],
+	[2, 50, 32],
+	[2, 50, 24],
+	[4, 25, 9],
+	
+	// 5
+	[1, 134, 108],
+	[2, 67, 43],
+	[2, 33, 15, 2, 34, 16],
+	[2, 33, 11, 2, 34, 12],
+	
+	// 6
+	[2, 86, 68],
+	[4, 43, 27],
+	[4, 43, 19],
+	[4, 43, 15],
+	
+	// 7		
+	[2, 98, 78],
+	[4, 49, 31],
+	[2, 32, 14, 4, 33, 15],
+	[4, 39, 13, 1, 40, 14],
+	
+	// 8
+	[2, 121, 97],
+	[2, 60, 38, 2, 61, 39],
+	[4, 40, 18, 2, 41, 19],
+	[4, 40, 14, 2, 41, 15],
+	
+	// 9
+	[2, 146, 116],
+	[3, 58, 36, 2, 59, 37],
+	[4, 36, 16, 4, 37, 17],
+	[4, 36, 12, 4, 37, 13],
+	
+	// 10		
+	[2, 86, 68, 2, 87, 69],
+	[4, 69, 43, 1, 70, 44],
+	[6, 43, 19, 2, 44, 20],
+	[6, 43, 15, 2, 44, 16],
+
+	// 11
+	[4, 101, 81],
+	[1, 80, 50, 4, 81, 51],
+	[4, 50, 22, 4, 51, 23],
+	[3, 36, 12, 8, 37, 13],
+
+	// 12
+	[2, 116, 92, 2, 117, 93],
+	[6, 58, 36, 2, 59, 37],
+	[4, 46, 20, 6, 47, 21],
+	[7, 42, 14, 4, 43, 15],
+
+	// 13
+	[4, 133, 107],
+	[8, 59, 37, 1, 60, 38],
+	[8, 44, 20, 4, 45, 21],
+	[12, 33, 11, 4, 34, 12],
+
+	// 14
+	[3, 145, 115, 1, 146, 116],
+	[4, 64, 40, 5, 65, 41],
+	[11, 36, 16, 5, 37, 17],
+	[11, 36, 12, 5, 37, 13],
+
+	// 15
+	[5, 109, 87, 1, 110, 88],
+	[5, 65, 41, 5, 66, 42],
+	[5, 54, 24, 7, 55, 25],
+	[11, 36, 12],
+
+	// 16
+	[5, 122, 98, 1, 123, 99],
+	[7, 73, 45, 3, 74, 46],
+	[15, 43, 19, 2, 44, 20],
+	[3, 45, 15, 13, 46, 16],
+
+	// 17
+	[1, 135, 107, 5, 136, 108],
+	[10, 74, 46, 1, 75, 47],
+	[1, 50, 22, 15, 51, 23],
+	[2, 42, 14, 17, 43, 15],
+
+	// 18
+	[5, 150, 120, 1, 151, 121],
+	[9, 69, 43, 4, 70, 44],
+	[17, 50, 22, 1, 51, 23],
+	[2, 42, 14, 19, 43, 15],
+
+	// 19
+	[3, 141, 113, 4, 142, 114],
+	[3, 70, 44, 11, 71, 45],
+	[17, 47, 21, 4, 48, 22],
+	[9, 39, 13, 16, 40, 14],
+
+	// 20
+	[3, 135, 107, 5, 136, 108],
+	[3, 67, 41, 13, 68, 42],
+	[15, 54, 24, 5, 55, 25],
+	[15, 43, 15, 10, 44, 16],
+
+	// 21
+	[4, 144, 116, 4, 145, 117],
+	[17, 68, 42],
+	[17, 50, 22, 6, 51, 23],
+	[19, 46, 16, 6, 47, 17],
+
+	// 22
+	[2, 139, 111, 7, 140, 112],
+	[17, 74, 46],
+	[7, 54, 24, 16, 55, 25],
+	[34, 37, 13],
+
+	// 23
+	[4, 151, 121, 5, 152, 122],
+	[4, 75, 47, 14, 76, 48],
+	[11, 54, 24, 14, 55, 25],
+	[16, 45, 15, 14, 46, 16],
+
+	// 24
+	[6, 147, 117, 4, 148, 118],
+	[6, 73, 45, 14, 74, 46],
+	[11, 54, 24, 16, 55, 25],
+	[30, 46, 16, 2, 47, 17],
+
+	// 25
+	[8, 132, 106, 4, 133, 107],
+	[8, 75, 47, 13, 76, 48],
+	[7, 54, 24, 22, 55, 25],
+	[22, 45, 15, 13, 46, 16],
+
+	// 26
+	[10, 142, 114, 2, 143, 115],
+	[19, 74, 46, 4, 75, 47],
+	[28, 50, 22, 6, 51, 23],
+	[33, 46, 16, 4, 47, 17],
+
+	// 27
+	[8, 152, 122, 4, 153, 123],
+	[22, 73, 45, 3, 74, 46],
+	[8, 53, 23, 26, 54, 24],
+	[12, 45, 15, 28, 46, 16],
+
+	// 28
+	[3, 147, 117, 10, 148, 118],
+	[3, 73, 45, 23, 74, 46],
+	[4, 54, 24, 31, 55, 25],
+	[11, 45, 15, 31, 46, 16],
+
+	// 29
+	[7, 146, 116, 7, 147, 117],
+	[21, 73, 45, 7, 74, 46],
+	[1, 53, 23, 37, 54, 24],
+	[19, 45, 15, 26, 46, 16],
+
+	// 30
+	[5, 145, 115, 10, 146, 116],
+	[19, 75, 47, 10, 76, 48],
+	[15, 54, 24, 25, 55, 25],
+	[23, 45, 15, 25, 46, 16],
+
+	// 31
+	[13, 145, 115, 3, 146, 116],
+	[2, 74, 46, 29, 75, 47],
+	[42, 54, 24, 1, 55, 25],
+	[23, 45, 15, 28, 46, 16],
+
+	// 32
+	[17, 145, 115],
+	[10, 74, 46, 23, 75, 47],
+	[10, 54, 24, 35, 55, 25],
+	[19, 45, 15, 35, 46, 16],
+
+	// 33
+	[17, 145, 115, 1, 146, 116],
+	[14, 74, 46, 21, 75, 47],
+	[29, 54, 24, 19, 55, 25],
+	[11, 45, 15, 46, 46, 16],
+
+	// 34
+	[13, 145, 115, 6, 146, 116],
+	[14, 74, 46, 23, 75, 47],
+	[44, 54, 24, 7, 55, 25],
+	[59, 46, 16, 1, 47, 17],
+
+	// 35
+	[12, 151, 121, 7, 152, 122],
+	[12, 75, 47, 26, 76, 48],
+	[39, 54, 24, 14, 55, 25],
+	[22, 45, 15, 41, 46, 16],
+
+	// 36
+	[6, 151, 121, 14, 152, 122],
+	[6, 75, 47, 34, 76, 48],
+	[46, 54, 24, 10, 55, 25],
+	[2, 45, 15, 64, 46, 16],
+
+	// 37
+	[17, 152, 122, 4, 153, 123],
+	[29, 74, 46, 14, 75, 47],
+	[49, 54, 24, 10, 55, 25],
+	[24, 45, 15, 46, 46, 16],
+
+	// 38
+	[4, 152, 122, 18, 153, 123],
+	[13, 74, 46, 32, 75, 47],
+	[48, 54, 24, 14, 55, 25],
+	[42, 45, 15, 32, 46, 16],
+
+	// 39
+	[20, 147, 117, 4, 148, 118],
+	[40, 75, 47, 7, 76, 48],
+	[43, 54, 24, 22, 55, 25],
+	[10, 45, 15, 67, 46, 16],
+
+	// 40
+	[19, 148, 118, 6, 149, 119],
+	[18, 75, 47, 31, 76, 48],
+	[34, 54, 24, 34, 55, 25],
+	[20, 45, 15, 61, 46, 16]
+];
+
+QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+	
+	var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+	
+	if (rsBlock === undefined) {
+		throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+	}
+
+	var length = rsBlock.length / 3;
+	
+	var list = [];
+	
+	for (var i = 0; i < length; i++) {
+
+		var count = rsBlock[i * 3 + 0];
+		var totalCount = rsBlock[i * 3 + 1];
+		var dataCount  = rsBlock[i * 3 + 2];
+
+		for (var j = 0; j < count; j++) {
+			list.push(new QRRSBlock(totalCount, dataCount) );	
+		}
+	}
+	
+	return list;
+};
+
+QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+
+	switch(errorCorrectLevel) {
+	case QRErrorCorrectLevel.L :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+	case QRErrorCorrectLevel.M :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+	case QRErrorCorrectLevel.Q :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+	case QRErrorCorrectLevel.H :
+		return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+	default :
+		return undefined;
+	}
+};
+
+module.exports = QRRSBlock;
+
+  };
+  defs["index"] = function (module, exports, require) {
+
+var QR8bitByte = require('./QR8bitByte');
+var QRUtil = require('./QRUtil');
+var QRPolynomial = require('./QRPolynomial');
+var QRRSBlock = require('./QRRSBlock');
+var QRBitBuffer = require('./QRBitBuffer');
+
+function QRCode(typeNumber, errorCorrectLevel) {
+	this.typeNumber = typeNumber;
+	this.errorCorrectLevel = errorCorrectLevel;
+	this.modules = null;
+	this.moduleCount = 0;
+	this.dataCache = null;
+	this.dataList = [];
+}
+
+QRCode.prototype = {
+	
+	addData : function(data) {
+		var newData = new QR8bitByte(data);
+		this.dataList.push(newData);
+		this.dataCache = null;
+	},
+	
+	isDark : function(row, col) {
+		if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+			throw new Error(row + "," + col);
+		}
+		return this.modules[row][col];
+	},
+
+	getModuleCount : function() {
+		return this.moduleCount;
+	},
+	
+	make : function() {
+		// Calculate automatically typeNumber if provided is < 1
+		if (this.typeNumber < 1 ){
+			var typeNumber = 1;
+			for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+				var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+
+				var buffer = new QRBitBuffer();
+				var totalDataCount = 0;
+				for (var i = 0; i < rsBlocks.length; i++) {
+					totalDataCount += rsBlocks[i].dataCount;
+				}
+
+				for (var x = 0; x < this.dataList.length; x++) {
+					var data = this.dataList[x];
+					buffer.put(data.mode, 4);
+					buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+					data.write(buffer);
+				}
+				if (buffer.getLengthInBits() <= totalDataCount * 8)
+					break;
+			}
+			this.typeNumber = typeNumber;
+		}
+		this.makeImpl(false, this.getBestMaskPattern() );
+	},
+	
+	makeImpl : function(test, maskPattern) {
+		
+		this.moduleCount = this.typeNumber * 4 + 17;
+		this.modules = new Array(this.moduleCount);
+		
+		for (var row = 0; row < this.moduleCount; row++) {
+			
+			this.modules[row] = new Array(this.moduleCount);
+			
+			for (var col = 0; col < this.moduleCount; col++) {
+				this.modules[row][col] = null;//(col + row) % 3;
+			}
+		}
+	
+		this.setupPositionProbePattern(0, 0);
+		this.setupPositionProbePattern(this.moduleCount - 7, 0);
+		this.setupPositionProbePattern(0, this.moduleCount - 7);
+		this.setupPositionAdjustPattern();
+		this.setupTimingPattern();
+		this.setupTypeInfo(test, maskPattern);
+		
+		if (this.typeNumber >= 7) {
+			this.setupTypeNumber(test);
+		}
+	
+		if (this.dataCache === null) {
+			this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+		}
+	
+		this.mapData(this.dataCache, maskPattern);
+	},
+
+	setupPositionProbePattern : function(row, col)  {
+		
+		for (var r = -1; r <= 7; r++) {
+			
+			if (row + r <= -1 || this.moduleCount <= row + r) continue;
+			
+			for (var c = -1; c <= 7; c++) {
+				
+				if (col + c <= -1 || this.moduleCount <= col + c) continue;
+				
+				if ( (0 <= r && r <= 6 && (c === 0 || c === 6) ) || 
+                     (0 <= c && c <= 6 && (r === 0 || r === 6) ) || 
+                     (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+					this.modules[row + r][col + c] = true;
+				} else {
+					this.modules[row + r][col + c] = false;
+				}
+			}		
+		}		
+	},
+	
+	getBestMaskPattern : function() {
+	
+		var minLostPoint = 0;
+		var pattern = 0;
+	
+		for (var i = 0; i < 8; i++) {
+			
+			this.makeImpl(true, i);
+	
+			var lostPoint = QRUtil.getLostPoint(this);
+	
+			if (i === 0 || minLostPoint >  lostPoint) {
+				minLostPoint = lostPoint;
+				pattern = i;
+			}
+		}
+	
+		return pattern;
+	},
+	
+
+	setupTimingPattern : function() {
+		
+		for (var r = 8; r < this.moduleCount - 8; r++) {
+			if (this.modules[r][6] !== null) {
+				continue;
+			}
+			this.modules[r][6] = (r % 2 === 0);
+		}
+	
+		for (var c = 8; c < this.moduleCount - 8; c++) {
+			if (this.modules[6][c] !== null) {
+				continue;
+			}
+			this.modules[6][c] = (c % 2 === 0);
+		}
+	},
+	
+	setupPositionAdjustPattern : function() {
+	
+		var pos = QRUtil.getPatternPosition(this.typeNumber);
+		
+		for (var i = 0; i < pos.length; i++) {
+		
+			for (var j = 0; j < pos.length; j++) {
+			
+				var row = pos[i];
+				var col = pos[j];
+				
+				if (this.modules[row][col] !== null) {
+					continue;
+				}
+				
+				for (var r = -2; r <= 2; r++) {
+				
+					for (var c = -2; c <= 2; c++) {
+					
+						if (Math.abs(r) === 2 || 
+                            Math.abs(c) === 2 ||
+                            (r === 0 && c === 0) ) {
+							this.modules[row + r][col + c] = true;
+						} else {
+							this.modules[row + r][col + c] = false;
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	setupTypeNumber : function(test) {
+	
+		var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+        var mod;
+	
+		for (var i = 0; i < 18; i++) {
+			mod = (!test && ( (bits >> i) & 1) === 1);
+			this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+		}
+	
+		for (var x = 0; x < 18; x++) {
+			mod = (!test && ( (bits >> x) & 1) === 1);
+			this.modules[x % 3 + this.moduleCount - 8 - 3][Math.floor(x / 3)] = mod;
+		}
+	},
+	
+	setupTypeInfo : function(test, maskPattern) {
+	
+		var data = (this.errorCorrectLevel << 3) | maskPattern;
+		var bits = QRUtil.getBCHTypeInfo(data);
+        var mod;
+	
+		// vertical		
+		for (var v = 0; v < 15; v++) {
+	
+			mod = (!test && ( (bits >> v) & 1) === 1);
+	
+			if (v < 6) {
+				this.modules[v][8] = mod;
+			} else if (v < 8) {
+				this.modules[v + 1][8] = mod;
+			} else {
+				this.modules[this.moduleCount - 15 + v][8] = mod;
+			}
+		}
+	
+		// horizontal
+		for (var h = 0; h < 15; h++) {
+	
+			mod = (!test && ( (bits >> h) & 1) === 1);
+			
+			if (h < 8) {
+				this.modules[8][this.moduleCount - h - 1] = mod;
+			} else if (h < 9) {
+				this.modules[8][15 - h - 1 + 1] = mod;
+			} else {
+				this.modules[8][15 - h - 1] = mod;
+			}
+		}
+	
+		// fixed module
+		this.modules[this.moduleCount - 8][8] = (!test);
+	
+	},
+	
+	mapData : function(data, maskPattern) {
+		
+		var inc = -1;
+		var row = this.moduleCount - 1;
+		var bitIndex = 7;
+		var byteIndex = 0;
+		
+		for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+	
+			if (col === 6) col--;
+	
+			while (true) {
+	
+				for (var c = 0; c < 2; c++) {
+					
+					if (this.modules[row][col - c] === null) {
+						
+						var dark = false;
+	
+						if (byteIndex < data.length) {
+							dark = ( ( (data[byteIndex] >>> bitIndex) & 1) === 1);
+						}
+	
+						var mask = QRUtil.getMask(maskPattern, row, col - c);
+	
+						if (mask) {
+							dark = !dark;
+						}
+						
+						this.modules[row][col - c] = dark;
+						bitIndex--;
+	
+						if (bitIndex === -1) {
+							byteIndex++;
+							bitIndex = 7;
+						}
+					}
+				}
+								
+				row += inc;
+	
+				if (row < 0 || this.moduleCount <= row) {
+					row -= inc;
+					inc = -inc;
+					break;
+				}
+			}
+		}
+		
+	}
+
+};
+
+QRCode.PAD0 = 0xEC;
+QRCode.PAD1 = 0x11;
+
+QRCode.createData = function(typeNumber, errorCorrectLevel, dataList) {
+	
+	var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+	
+	var buffer = new QRBitBuffer();
+	
+	for (var i = 0; i < dataList.length; i++) {
+		var data = dataList[i];
+		buffer.put(data.mode, 4);
+		buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber) );
+		data.write(buffer);
+	}
+
+	// calc num max data.
+	var totalDataCount = 0;
+	for (var x = 0; x < rsBlocks.length; x++) {
+		totalDataCount += rsBlocks[x].dataCount;
+	}
+
+	if (buffer.getLengthInBits() > totalDataCount * 8) {
+		throw new Error("code length overflow. (" + 
+            buffer.getLengthInBits() + 
+            ">" +  
+            totalDataCount * 8 + 
+            ")");
+	}
+
+	// end code
+	if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+		buffer.put(0, 4);
+	}
+
+	// padding
+	while (buffer.getLengthInBits() % 8 !== 0) {
+		buffer.putBit(false);
+	}
+
+	// padding
+	while (true) {
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD0, 8);
+		
+		if (buffer.getLengthInBits() >= totalDataCount * 8) {
+			break;
+		}
+		buffer.put(QRCode.PAD1, 8);
+	}
+
+	return QRCode.createBytes(buffer, rsBlocks);
+};
+
+QRCode.createBytes = function(buffer, rsBlocks) {
+
+	var offset = 0;
+	
+	var maxDcCount = 0;
+	var maxEcCount = 0;
+	
+	var dcdata = new Array(rsBlocks.length);
+	var ecdata = new Array(rsBlocks.length);
+	
+	for (var r = 0; r < rsBlocks.length; r++) {
+
+		var dcCount = rsBlocks[r].dataCount;
+		var ecCount = rsBlocks[r].totalCount - dcCount;
+
+		maxDcCount = Math.max(maxDcCount, dcCount);
+		maxEcCount = Math.max(maxEcCount, ecCount);
+		
+		dcdata[r] = new Array(dcCount);
+		
+		for (var i = 0; i < dcdata[r].length; i++) {
+			dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+		}
+		offset += dcCount;
+		
+		var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+		var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+		var modPoly = rawPoly.mod(rsPoly);
+		ecdata[r] = new Array(rsPoly.getLength() - 1);
+		for (var x = 0; x < ecdata[r].length; x++) {
+            var modIndex = x + modPoly.getLength() - ecdata[r].length;
+			ecdata[r][x] = (modIndex >= 0)? modPoly.get(modIndex) : 0;
+		}
+
+	}
+	
+	var totalCodeCount = 0;
+	for (var y = 0; y < rsBlocks.length; y++) {
+		totalCodeCount += rsBlocks[y].totalCount;
+	}
+
+	var data = new Array(totalCodeCount);
+	var index = 0;
+
+	for (var z = 0; z < maxDcCount; z++) {
+		for (var s = 0; s < rsBlocks.length; s++) {
+			if (z < dcdata[s].length) {
+				data[index++] = dcdata[s][z];
+			}
+		}
+	}
+
+	for (var xx = 0; xx < maxEcCount; xx++) {
+		for (var t = 0; t < rsBlocks.length; t++) {
+			if (xx < ecdata[t].length) {
+				data[index++] = ecdata[t][xx];
+			}
+		}
+	}
+
+	return data;
+
+};
+
+module.exports = QRCode;
+
+  };
+  return { QRCode: req("index"), ECL: req("QRErrorCorrectLevel") };
+})();
+var GARUDA_SRC = "data:image/jpeg;base64,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";
+</script>
 <script>
 (function () {
   "use strict";
@@ -898,6 +2219,16 @@ select#group {
     return Promise.race([load, new Promise(function (r) { setTimeout(r, 4000); })]);
   })();
 
+  // Garuda emblem for the memo header (taken from the school's sample form)
+  var garuda = new Image();
+  var garudaReady = new Promise(function (resolve) {
+    if (typeof GARUDA_SRC !== "string") { resolve(); return; }
+    garuda.onload = resolve;
+    garuda.onerror = resolve;
+    garuda.src = GARUDA_SRC;
+  });
+  fontsReady = Promise.all([fontsReady, garudaReady]);
+
   function spacedRange(a, b) { return pad3(a) + " - " + pad3(b); }
   function timeText(t) { return t.replace("–", " - ") + " น."; }
   function minutesOf(t) {
@@ -946,6 +2277,15 @@ select#group {
     }
     return mm * this.k / this.ratio[w];
   };
+  // font size (px) whose Thai letter height (the body of น) is `mm`
+  Painter.prototype.xh = function (w, mm) {
+    var key = "x" + w;
+    if (!this.ratio[key]) {
+      this.font(w, 100);
+      this.ratio[key] = (this.ctx.measureText("น").actualBoundingBoxAscent || 47) / 100;
+    }
+    return mm * this.k / this.ratio[key];
+  };
   // font size (px) at which `text` is `mm` wide
   Painter.prototype.fit = function (w, text, mm) {
     this.font(w, 100);
@@ -971,6 +2311,89 @@ select#group {
   };
   Painter.prototype.rect = function (x, y, w, h) {
     this.ctx.fillRect(x * this.k, y * this.k, w * this.k, h * this.k);
+  };
+  Painter.prototype.width = function (str, w, px) {
+    this.font(w, px);
+    return this.ctx.measureText(str).width / this.k;
+  };
+  // digit height in mm at this size
+  Painter.prototype.capMm = function (w, px) {
+    this.font(w, px);
+    return (this.ctx.measureText("1").actualBoundingBoxAscent || px * 0.7) / this.k;
+  };
+  // a run of dots from x0 to x1, as on a paper form
+  Painter.prototype.dots = function (x0, x1, y, px) {
+    var dw = this.width(".", 400, px), n = Math.max(0, Math.floor((x1 - x0) / dw));
+    this.text(new Array(n + 1).join("."), x0, y, 400, px);
+  };
+  Painter.prototype.checkbox = function (x, y, s, on) {
+    var t = 0.28, c = this.ctx, k = this.k;
+    this.rect(x, y, s, t); this.rect(x, y + s - t, s, t);
+    this.rect(x, y, t, s); this.rect(x + s - t, y, t, s);
+    if (!on) return;
+    c.save();
+    c.lineWidth = 0.4 * k;
+    c.lineCap = "round";
+    c.lineJoin = "round";
+    c.strokeStyle = "#000000";
+    c.beginPath();
+    c.moveTo((x + 0.85) * k, (y + s * 0.53) * k);
+    c.lineTo((x + s * 0.41) * k, (y + s * 0.77) * k);
+    c.lineTo((x + s * 0.82) * k, (y + s * 0.22) * k);
+    c.stroke();
+    c.restore();
+  };
+
+  // Justified Thai paragraph with bold runs. Lines break between words
+  // (Intl.Segmenter where the browser has it) and stretch at spaces only.
+  var THAI = /[฀-๿]/;
+  var thaiWords = (typeof Intl !== "undefined" && Intl.Segmenter) ? new Intl.Segmenter("th", { granularity: "word" }) : null;
+  Painter.prototype.paragraph = function (runs, o) {
+    var p = this, ctx = this.ctx, k = this.k, tokens = [], groups = [], cur = null;
+    runs.forEach(function (r) {
+      var parts = thaiWords ? Array.from(thaiWords.segment(r.t), function (x) { return x.segment; }) : r.t.split(/(\s+)/);
+      parts.forEach(function (t) { if (t) tokens.push({ t: t, b: r.b, sp: /^\s+$/.test(t) }); });
+    });
+    tokens.forEach(function (tk, i) {
+      var prev = tokens[i - 1];
+      var brk = !cur || tk.sp || prev.sp || (THAI.test(tk.t.charAt(0)) && THAI.test(prev.t.charAt(prev.t.length - 1)));
+      if (brk) { cur = { tokens: [], sp: tk.sp, w: 0 }; groups.push(cur); }
+      tk.w = p.width(tk.t, tk.b ? 700 : 400, o.px);
+      cur.tokens.push(tk);
+      cur.w += tk.w;
+    });
+    var lines = [], line = [], lw = 0, maxW = o.right - o.x1st;
+    function close(last) {
+      while (line.length && line[line.length - 1].sp) lw -= line.pop().w;
+      if (line.length) lines.push({ groups: line, w: lw, max: maxW, last: last });
+      line = []; lw = 0; maxW = o.right - o.x;
+    }
+    groups.forEach(function (g) {
+      if (g.sp && !line.length) return;
+      if (!g.sp && line.length && lw + g.w > maxW) close(false);
+      line.push(g);
+      lw += g.w;
+    });
+    close(true);
+    lines.forEach(function (ln, li) {
+      var x = li === 0 ? o.x1st : o.x, y = o.y + li * o.lh;
+      var spaces = ln.groups.filter(function (g) { return g.sp; }).length;
+      var extra = (!ln.last && spaces) ? (ln.max - ln.w) / spaces : 0;
+      if (extra > 9) extra = 0;
+      ln.groups.forEach(function (g) {
+        g.tokens.forEach(function (t) {
+          if (!t.sp) {
+            p.font(t.b ? 700 : 400, o.px);
+            ctx.textAlign = "left";
+            ctx.textBaseline = "alphabetic";
+            ctx.fillText(t.t, x * k, y * k);
+          }
+          x += t.w;
+        });
+        if (g.sp) x += extra;
+      });
+    });
+    return lines.length;
   };
 
   // Landscape 297 × 210 mm
@@ -1141,12 +2564,27 @@ select#group {
 
   function fileTitle(s, kind) { return KINDS[kind].title + " - " + s.code + " " + s.name; }
 
-  function makePdf(s, kind, spares, onProgress) {
-    var pages = pagesFor(s, kind, spares), canvas = document.createElement("canvas"), out = [], i = 0;
+  // A printable document: how many pages, how to draw page i, and its names.
+  function examDoc(s, kind, spares) {
+    if (spares === undefined) spares = print.spares;
+    var pages = pagesFor(s, kind, spares);
+    return {
+      key: s.id + "|" + kind + "|" + spares,
+      title: KINDS[kind].title + " · " + s.code + " " + s.name,
+      file: fileTitle(s, kind),
+      count: pages.length,
+      land: function (i) { return pages[i].kind === "cover"; },
+      note: function (i) { return pageNote(pages[i]); },
+      paint: function (canvas, k, i, forPdf) { paint(canvas, k, s, pages[i], forPdf); }
+    };
+  }
+
+  function makePdfDoc(doc, onProgress) {
+    var canvas = document.createElement("canvas"), out = [], i = 0;
     function next() {
-      if (i >= pages.length) return buildPdf(out, fileTitle(s, kind));
-      paint(canvas, PDF_K, s, pages[i], true);
-      if (onProgress) onProgress(i + 1, pages.length);
+      if (i >= doc.count) return buildPdf(out, doc.file);
+      doc.paint(canvas, PDF_K, i, true);
+      if (onProgress) onProgress(i + 1, doc.count);
       return canvasJpeg(canvas).then(function (bytes) {
         out.push({ bytes: bytes, w: canvas.width, h: canvas.height });
         i++;
@@ -1155,6 +2593,8 @@ select#group {
     }
     return fontsReady.then(next);
   }
+
+  function makePdf(s, kind, spares, onProgress) { return makePdfDoc(examDoc(s, kind, spares), onProgress); }
 
   // ---------- print section UI ----------
   var print = { spares: 1, thumbs: {}, last: null, busy: false };
@@ -1246,7 +2686,10 @@ select#group {
   var downloadsReady = null;
   downloadsP.then(function (dl) {
     downloadsReady = !!dl;
-    if (!dl) renderDetail();
+    if (!dl) {
+      renderDetail();
+      if (!document.getElementById("viewWp7").hidden) renderWpPanel();
+    }
   });
 
   function downloadError(err) {
@@ -1257,29 +2700,28 @@ select#group {
     return NO_DOWNLOAD;
   }
 
-  function downloadPdf(s, kind, btn) {
+  function downloadPdf(doc, btn, say) {
     if (print.busy) return;
     print.busy = true;
     btn.disabled = true;
-    var key = s.id + "|" + kind + "|" + print.spares, name = fileTitle(s, kind) + ".pdf";
+    var name = doc.file + ".pdf";
     downloadsP.then(function (dl) {
       if (!dl) throw { code: "unavailable" };
-      var blobP = print.last && print.last.key === key
+      var blobP = print.last && print.last.key === doc.key
         ? Promise.resolve(print.last.blob)
-        : makePdf(s, kind, print.spares, function (i, n) { setPrintStatus("กำลังสร้าง PDF หน้า " + i + " จาก " + n + "…"); })
-            .then(function (blob) { print.last = { key: key, blob: blob }; return blob; });
+        : makePdfDoc(doc, function (i, n) { say("กำลังสร้าง PDF หน้า " + i + " จาก " + n + "…"); })
+            .then(function (blob) { print.last = { key: doc.key, blob: blob }; return blob; });
       return blobP.then(function (blob) {
-        setPrintStatus("กรุณายืนยันการบันทึกไฟล์ " + name);
+        say("กรุณายืนยันการบันทึกไฟล์ " + name);
         return dl.save({ filename: name, data: blob });
       });
     }).then(function () {
-      setPrintStatus("บันทึกไฟล์ " + name + " แล้ว");
+      say("บันทึกไฟล์ " + name + " แล้ว");
     }, function (err) {
-      setPrintStatus(downloadError(err));
+      say(downloadError(err));
     }).then(function () {
       print.busy = false;
-      var b = el.detail.querySelector('[data-pdf="' + kind + '"]');
-      if (b) b.disabled = false;
+      btn.disabled = false;
     });
   }
 
@@ -1302,7 +2744,7 @@ select#group {
     '<button type="button" class="btn" id="viewerClose">ปิด</button></div></div>' +
     '<div class="viewer-body" id="viewerBody"></div>';
   document.body.appendChild(viewer);
-  var view = { token: 0, back: null, key: null, urls: [], s: null, kind: null };
+  var view = { token: 0, back: null, key: null, urls: [], doc: null };
 
   // Print layer: A4 portrait page images (covers turned, as in the PDF), shown only while printing.
   var sheets = document.createElement("div");
@@ -1312,20 +2754,20 @@ select#group {
   var printing = false;
 
   function printDoc() {
-    if (printing || !view.s) return;
+    if (printing || !view.doc) return;
     printing = true;
     var btn = document.getElementById("viewerPrint");
     btn.disabled = true;
-    var s = view.s, pages = pagesFor(s, view.kind, print.spares), canvas = document.createElement("canvas"), imgs = [], i = 0;
+    var doc = view.doc, canvas = document.createElement("canvas"), imgs = [], i = 0;
     function done() {
       printing = false;
       btn.disabled = false;
       btn.textContent = "พิมพ์";
     }
     function step() {
-      if (i < pages.length) {
-        btn.textContent = "กำลังเตรียม " + (i + 1) + "/" + pages.length;
-        paint(canvas, PRINT_IMG_K, s, pages[i], true);
+      if (i < doc.count) {
+        btn.textContent = "กำลังเตรียม " + (i + 1) + "/" + doc.count;
+        doc.paint(canvas, PRINT_IMG_K, i, true);
         var img = new Image();
         img.alt = "";
         img.src = canvas.toDataURL("image/jpeg", 0.9);
@@ -1355,36 +2797,36 @@ select#group {
     return pg.bag.spare ? "กระเป๋าที่ " + pg.bag.seq + " · สำรอง" : "กระเป๋าที่ " + pg.bag.seq + " · ห้องสอบ " + pg.bag.room + " (" + pg.bag.roomNo + ")";
   }
 
-  function showImages(s, kind, start) {
-    var pages = pagesFor(s, kind, print.spares), key = s.id + "|" + kind + "|" + print.spares, token = ++view.token;
-    view.s = s;
-    view.kind = kind;
-    if (view.key !== key) { view.key = key; view.urls = []; }
+  function showImages(doc, start) {
+    var token = ++view.token, n = doc.count, figsHtml = "", i;
+    view.doc = doc;
+    if (view.key !== doc.key) { view.key = doc.key; view.urls = []; }
     view.back = document.activeElement;
-    document.getElementById("viewerTitle").textContent = KINDS[kind].title + " · " + s.code + " " + s.name + " · " + pages.length + " หน้า";
+    document.getElementById("viewerTitle").textContent = doc.title + " · " + n + " หน้า";
     var body = document.getElementById("viewerBody");
-    body.innerHTML = pages.map(function (pg, i) {
-      return '<figure class="sheet' + (pg.kind === "cover" ? " land" : "") + '">' +
-        '<img alt="' + esc(KINDS[kind].title + " หน้า " + (i + 1)) + '">' +
-        "<figcaption>หน้า " + (i + 1) + " จาก " + pages.length + " · " + esc(pageNote(pg)) + "</figcaption></figure>";
-    }).join("");
+    for (i = 0; i < n; i++) {
+      figsHtml += '<figure class="sheet' + (doc.land(i) ? " land" : "") + '">' +
+        '<img alt="' + esc(doc.title + " หน้า " + (i + 1)) + '">' +
+        "<figcaption>หน้า " + (i + 1) + " จาก " + n + " · " + esc(doc.note(i)) + "</figcaption></figure>";
+    }
+    body.innerHTML = figsHtml;
     viewer.hidden = false;
     document.getElementById("viewerClose").focus();
     var figs = body.querySelectorAll(".sheet");
     body.scrollTop = 0;
     if (start && figs[start]) figs[start].scrollIntoView({ block: "start" });
-    var order = [], i;
-    for (i = start; i < pages.length; i++) order.push(i);
+    var order = [];
+    for (i = start; i < n; i++) order.push(i);
     for (i = 0; i < start; i++) order.push(i);
     var canvas = document.createElement("canvas");
     function step() {
       if (token !== view.token || viewer.hidden || !order.length) return;
-      var n = order.shift();
-      if (!view.urls[n]) {
-        paint(canvas, PRINT_IMG_K, s, pages[n], false);
-        view.urls[n] = canvas.toDataURL("image/jpeg", 0.9);
+      var p = order.shift();
+      if (!view.urls[p]) {
+        doc.paint(canvas, PRINT_IMG_K, p, false);
+        view.urls[p] = canvas.toDataURL("image/jpeg", 0.9);
       }
-      figs[n].querySelector("img").src = view.urls[n];
+      figs[p].querySelector("img").src = view.urls[p];
       setTimeout(step, 0);
     }
     fontsReady.then(step);
@@ -1445,6 +2887,544 @@ select#group {
     } catch (e) { fallback(); }
   }
 
+  // ---------- วผ.7: บันทึกข้อความขออนุญาตเข้าสอบย้อนหลัง ----------
+  // Student names never ship with this page. They are loaded from the sheet on request
+  // (ordinary web page only) or pasted in, and kept in this browser only.
+  var WP7 = {
+    term: "กลางภาคเรียนที่ 2",
+    year: "2569",
+    casePrefix: "69-T2-MID-20261109-",
+    qrBase: "https://script.google.com/a/streesp.ac.th/macros/s/AKfycbyIkFZrkZBpjX5Jn5UmBP4gHH1XtDwjBTfyVELc0NCn-PKU9u2oX3B1RrgUDRaOq3c4/exec?caseID=",
+    sheetUrl: "https://docs.google.com/spreadsheets/d/1xFDJVv1cTaBEND7d_FaKCj7JAh8Bo8oahPFi7uvorLI/gviz/tq?gid=983758&headers=1&tqx=responseHandler:",
+    reasons: ["ป่วย", "ลากิจ", "พักการเรียน", "เข้าร่วมกิจกรรมของโรงเรียน"]
+  };
+  var DAY_DATE = ["9 พฤศจิกายน พ.ศ. 2569", "11 พฤศจิกายน พ.ศ. 2569", "13 พฤศจิกายน พ.ศ. 2569"];
+  var TH_MONTHS = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+  function isoToday() {
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function thaiDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+    return m ? Number(m[3]) + " " + TH_MONTHS[Number(m[2]) - 1] + " พ.ศ. " + (Number(m[1]) + 543) : "";
+  }
+
+  var wp = { students: [], loadedAt: "", day: 0, cls: "", q: "", absent: {}, memoDate: isoToday(), pasting: false, loading: false, confirmClear: false, msg: "" };
+  function readStore(key) { try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+  function writeStore(key, val) { try { if (val === null) localStorage.removeItem(key); else localStorage.setItem(key, JSON.stringify(val)); } catch (e) {} }
+  (function () {
+    var s = readStore("wp7Students"), a = readStore("wp7Absent");
+    if (s && Array.isArray(s.students)) { wp.students = s.students; wp.loadedAt = s.loadedAt || ""; }
+    if (a && typeof a === "object") wp.absent = a;
+  })();
+  function saveAbsent() { writeStore("wp7Absent", wp.absent); }
+
+  function clsNum(cls) { return Number(String(cls).split("/")[1]) || 0; }
+  function byClass(a, b) { return clsNum(a.cls) - clsNum(b.cls) || a.no - b.no; }
+  function studentById(id) { for (var i = 0; i < wp.students.length; i++) if (wp.students[i].id === id) return wp.students[i]; return null; }
+  function fullName(st) { return (st.first + " " + st.last).trim(); }
+  function classesLoaded() {
+    var seen = {};
+    wp.students.forEach(function (st) { if (/^6\//.test(st.cls)) seen[st.cls] = true; });
+    return Object.keys(seen).sort(function (a, b) { return clsNum(a) - clsNum(b); });
+  }
+  function subjectsFor(cls, day) {
+    var n = clsNum(cls);
+    return SUBJECTS.filter(function (s) { return s.day === day && (s.classes === ALL || s.classes.indexOf(n) !== -1); });
+  }
+  function isAbsent(id, day) { var a = wp.absent[id]; return !!(a && a.days && a.days[day]); }
+  function setAbsent(st, day, on) {
+    var a = wp.absent[st.id];
+    if (on) {
+      if (!a) a = wp.absent[st.id] = { reason: WP7.reasons[0], memo: true, cert: false, days: {} };
+      if (!a.days[day]) a.days[day] = subjectsFor(st.cls, day).map(function (s) { return s.code; });
+    } else if (a) {
+      delete a.days[day];
+      if (!Object.keys(a.days).length) delete wp.absent[st.id];
+    }
+    saveAbsent();
+  }
+  function absentStudents() {
+    return Object.keys(wp.absent).map(studentById).filter(Boolean).sort(byClass);
+  }
+
+  // One memo per student per missed exam day
+  function wp7Items() {
+    var items = [];
+    absentStudents().forEach(function (st) {
+      var a = wp.absent[st.id], own = [];
+      Object.keys(a.days).map(Number).sort().forEach(function (d) {
+        var subs = subjectsFor(st.cls, d).filter(function (s) { return a.days[d].indexOf(s.code) !== -1; });
+        if (subs.length) own.push({ st: st, day: d, reason: a.reason, memo: a.memo, cert: a.cert,
+          subjects: subs.map(function (s) { return { code: s.code, name: s.name }; }) });
+      });
+      own.forEach(function (it, i) { it.sheetNo = i + 1; it.sheetTotal = own.length; items.push(it); });
+    });
+    return items;
+  }
+
+  function wp7Doc(items) {
+    var people = [];
+    items.forEach(function (it) { if (people.indexOf(it.st) === -1) people.push(it.st); });
+    return {
+      key: "wp7|" + wp.memoDate + "|" + items.map(function (it) {
+        return [it.st.id, it.day, it.subjects.map(function (s) { return s.code; }).join(","), it.reason, it.memo, it.cert].join(":");
+      }).join(";"),
+      title: "บันทึกข้อความขอสอบย้อนหลัง (วผ.7)",
+      file: people.length === 1 ? "วผ.7 - " + people[0].id + " " + fullName(people[0]) : "วผ.7 - ขอสอบย้อนหลัง " + people.length + " คน",
+      count: items.length,
+      land: function () { return false; },
+      note: function (i) { var it = items[i]; return fullName(it.st) + " · ม." + it.st.cls + " · " + DAYS[it.day].chip; },
+      paint: function (canvas, k, i) { paintWp7(canvas, k, items[i]); }
+    };
+  }
+
+  var qrCache = {};
+  function qrModules(text) {
+    if (!qrCache[text]) {
+      var q = new QRLib.QRCode(-1, QRLib.ECL.L);
+      q.addData(text);
+      q.make();
+      qrCache[text] = q;
+    }
+    return qrCache[text];
+  }
+  function drawQr(ctx, k, text, x, y, size) {
+    if (typeof QRLib === "undefined") return;
+    var q = qrModules(text), n = q.getModuleCount();
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        if (!q.isDark(r, c)) continue;
+        var x0 = Math.round((x + size * c / n) * k), x1 = Math.round((x + size * (c + 1) / n) * k);
+        var y0 = Math.round((y + size * r / n) * k), y1 = Math.round((y + size * (r + 1) / n) * k);
+        ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+      }
+    }
+  }
+
+  // A4 portrait, laid out from the school's sample memo (mm)
+  function drawWp7(ctx, k, it) {
+    var p = new Painter(ctx, k), st = it.st, name = fullName(st), caseId = WP7.casePrefix + st.id;
+    var z = {
+      title: p.fit(700, "บันทึกข้อความ", 46.2),
+      body: p.xh(400, 2.28),
+      tag: p.cap(400, 2.45),
+      cls: p.cap(400, 3.95),
+      table: p.xh(400, 1.93),
+      code: p.fit(700, "รหัสคำร้อง: 69-T1-FINAL-20260907-40565 (แผ่นที่ 1/2)", 63.6)
+    };
+    if (garuda.complete && garuda.naturalWidth) ctx.drawImage(garuda, 13.0 * k, 12.4 * k, 13.29 * k, 13.38 * k);
+    p.text("บันทึกข้อความ", 104.65, 24.3, 700, z.title, "center");
+    p.text("วผ.7", 197.27, 17.7, 400, z.tag, "right");
+    p.text("ม. " + st.cls, 197.27, 25.2, 400, z.cls, "right");
+
+    p.text("ส่วนราชการ", 12.95, 35.9, 400, z.body);
+    p.text(DOC.school, Math.max(34.8, 12.95 + p.width("ส่วนราชการ", 400, z.body) + 2.5), 35.9, 400, z.body);
+    p.text("ที่", 12.9, 44.1, 400, z.body);
+    p.dots(26.25, 100.75, 44.1, z.body);
+    p.text("วันที่", 105.24, 44.1, 400, z.body);
+    var dateX = Math.max(117.94, 105.24 + p.width("วันที่", 400, z.body) + 2.5);
+    p.text(thaiDate(wp.memoDate), dateX, 44.1, 400, z.body, "left", 197 - dateX);
+    p.text("เรื่อง", 13.1, 52.3, 400, z.body);
+    p.text("ขออนุญาตเข้าสอบ", 27.0, 52.3, 400, z.body);
+    p.rect(12.7, 57.25, 184.7, 0.3);
+    p.text("เรียน", 13.1, 66.1, 400, z.body);
+    p.text("ผู้อำนวยการ" + DOC.school, 26.25, 66.1, 400, z.body, "left", 96);
+    p.checkbox(125.22, 62.48, 4.24, it.memo);
+    p.text("ทำบันทึกข้อความแล้ว", 131.23, 66.1, 700, z.body, "left", 35.5);
+    p.checkbox(167.89, 62.48, 4.24, it.cert);
+    p.text("ใบรับรองแพทย์", 173.48, 66.1, 700, z.body, "left", 24);
+
+    var lines = p.paragraph([
+      { t: "ตามที่ ข้าพเจ้า ", b: false }, { t: name, b: true },
+      { t: " นักเรียนชั้นมัธยมศึกษาปีที่ ", b: false }, { t: st.cls, b: true },
+      { t: " เลขที่ ", b: false }, { t: String(st.no), b: true },
+      { t: " เลขประจำตัว ", b: false }, { t: st.id, b: true },
+      { t: " ไม่สามารถเข้ารับการสอบ", b: false }, { t: WP7.term, b: true },
+      { t: " ปีการศึกษา ", b: false }, { t: WP7.year, b: true },
+      { t: " ในวันที่ ", b: false }, { t: DAY_DATE[it.day], b: true },
+      { t: " ตามตารางที่กำหนดได้ เนื่องจาก", b: false }, { t: it.reason || "", b: true },
+      { t: " นั้น", b: false }
+    ], { x1st: 26.16, x: 12.7, right: 197.4, y: 74.6, lh: 6.3, px: z.body });
+    var yAsk = 74.6 + (lines - 1) * 6.3 + 8.35;
+    var askLines = p.paragraph([
+      { t: "ในการนี้ ข้าพเจ้าขออนุญาตเข้าสอบย้อนหลัง ในรายวิชาที่ยังไม่ได้เข้ารับการสอบ จำนวน ", b: false },
+      { t: String(it.subjects.length), b: true }, { t: " รายวิชา ดังนี้", b: false }
+    ], { x1st: 25.74, x: 12.7, right: 197.4, y: yAsk, lh: 6.3, px: z.body });
+
+    // Subject table: 10 numbered rows; filled rows are shorter, as on the sample
+    var X = [12.7, 27.55, 97.8, 123.4, 145.65, 175.0, 197.25], top = yAsk + (askLines - 1) * 6.3 + 5.25, HEAD = 8.55, TO = 0.45, TI = 0.3;
+    var rows = [], y = top + HEAD, r;
+    for (r = 0; r < 10; r++) { var h = r < it.subjects.length ? 6.85 : 8.55; rows.push({ y: y, h: h }); y += h; }
+    var bottom = y, W = X[6] - X[0];
+    p.rect(X[0] - TO / 2, top - TO / 2, W + TO, TO);
+    p.rect(X[0] - TO / 2, top + HEAD - TO / 2, W + TO, TO);
+    rows.forEach(function (rw, i) { var t = i === 9 ? TO : TI; p.rect(X[0] - t / 2, rw.y + rw.h - t / 2, W + t, t); });
+    X.forEach(function (x, i) { var t = (i === 0 || i === 6) ? TO : TI; p.rect(x - t / 2, top - TO / 2, t, bottom - top + TO); });
+    ["ลำดับที่", "รายวิชา", "ครูผู้สอน", "จัดข้อสอบ", "ดำเนินการสอบ", "ครูรับข้อสอบ"].forEach(function (hd, c) {
+      p.text(hd, (X[c] + X[c + 1]) / 2, top + 6.05, 700, z.table, "center", X[c + 1] - X[c] - 1.5);
+    });
+    var capT = p.capMm(400, z.table);
+    rows.forEach(function (rw, i) {
+      var base = rw.y + rw.h / 2 + capT / 2, sub = it.subjects[i];
+      p.text(String(i + 1), (X[0] + X[1]) / 2, base, 400, z.table, "center");
+      if (sub) {
+        var cw = p.width(sub.code + " ", 700, z.table);
+        p.text(sub.code, 29.97, base, 700, z.table);
+        p.text(sub.name, 29.97 + cw, base, 400, z.table, "left", X[2] - 29.97 - cw - 1);
+      }
+    });
+
+    p.text("จึงเรียนมาเพื่อโปรดพิจารณา", 26.08, bottom + 9.95, 400, z.body);
+    var cx = 147.45, w1 = p.width("ลงชื่อ", 400, z.body), w2 = p.width("นักเรียน", 400, z.body);
+    p.text("ลงชื่อ", 109.14, bottom + 22.6, 400, z.body);
+    p.dots(109.14 + w1 + 1.2, 185.76 - w2 - 1.2, bottom + 22.6, z.body);
+    p.text("นักเรียน", 185.76, bottom + 22.6, 400, z.body, "right");
+    p.text("( " + name + " )", cx, bottom + 29.9, 700, z.body, "center", 84);
+    p.text("วันที่ ........ / ........................ / ...........", cx, bottom + 37.8, 400, z.body, "center");
+    drawQr(ctx, k, WP7.qrBase + caseId, 136.48, bottom + 45.6, 22.27);
+    ctx.fillStyle = "#405060";
+    p.text("รหัสคำร้อง: " + caseId + " (แผ่นที่ " + it.sheetNo + "/" + it.sheetTotal + ")", cx, bottom + 73.6, 700, z.code, "center", 90);
+    ctx.fillStyle = "#000000";
+  }
+
+  function paintWp7(canvas, k, it) {
+    canvas.width = Math.round(210 * k);
+    canvas.height = Math.round(297 * k);
+    var ctx = canvas.getContext("2d");
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#000000";
+    drawWp7(ctx, k, it);
+  }
+
+  // ---- student list: load from the sheet, paste, or a CSV file ----
+  function normCls(v) { var m = String(v || "").match(/(\d+)\s*\/\s*0*(\d+)/); return m ? m[1] + "/" + Number(m[2]) : ""; }
+  function cleanCell(v) { return String(v == null ? "" : v).replace(/\s+/g, " ").trim(); }
+  function studentsFrom(header, rows) {
+    var h = header.map(cleanCell);
+    function col(names, fallback) { for (var i = 0; i < names.length; i++) { var j = h.indexOf(names[i]); if (j !== -1) return j; } return fallback; }
+    var iNo = col(["เลขที่"], 0), iId = col(["เลขประจำตัว"], 1), iFirst = col(["ชื่อ"], 2), iLast = col(["สกุล", "นามสกุล"], 3);
+    var iRoom = col(["ห้อง"], 6), iLv = col(["ระดับ1"], -1), iRm = col(["ห้อง1"], -1);
+    var out = [], seen = {};
+    rows.forEach(function (row) {
+      var id = cleanCell(row[iId]).replace(/\.0+$/, ""), first = cleanCell(row[iFirst]), last = cleanCell(row[iLast]);
+      var cls = normCls(row[iRoom]) || (iLv >= 0 && iRm >= 0 ? normCls(row[iLv] + "/" + row[iRm]) : "");
+      var no = parseInt(cleanCell(row[iNo]), 10);
+      if (!id || !first || !cls || seen[id]) return;
+      seen[id] = true;
+      out.push({ no: isNaN(no) ? 0 : no, id: id, first: first, last: last, cls: cls });
+    });
+    return out.sort(byClass);
+  }
+  function csvRow(line) {
+    var out = [], cell = "", q = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line.charAt(i);
+      if (q) { if (ch === '"') { if (line.charAt(i + 1) === '"') { cell += '"'; i++; } else q = false; } else cell += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ",") { out.push(cell); cell = ""; }
+      else cell += ch;
+    }
+    out.push(cell);
+    return out;
+  }
+  function parsePasted(text) {
+    var lines = String(text || "").replace(/^﻿/, "").replace(/\r/g, "").split("\n").filter(function (l) { return l.trim(); });
+    if (!lines.length) return [];
+    var tab = lines[0].indexOf("\t") !== -1;
+    var rows = lines.map(function (l) { return tab ? l.split("\t") : csvRow(l); });
+    var hi = -1;
+    rows.some(function (r, i) { if (r.some(function (c) { return cleanCell(c) === "เลขประจำตัว"; })) { hi = i; return true; } return false; });
+    return studentsFrom(hi >= 0 ? rows[hi] : [], hi >= 0 ? rows.slice(hi + 1) : rows);
+  }
+  function rowsFromGviz(table) {
+    var labels = (table.cols || []).map(function (c) { return c.label || ""; });
+    var rows = (table.rows || []).map(function (r) {
+      return (r.c || []).map(function (c) { return c ? (c.f != null ? c.f : (c.v == null ? "" : c.v)) : ""; });
+    });
+    if (!labels.some(function (l) { return cleanCell(l); }) && rows.length) labels = rows.shift();
+    return studentsFrom(labels, rows);
+  }
+  function loadFromSheet() {
+    return new Promise(function (resolve, reject) {
+      var cb = "__wp7cb" + Date.now(), s = document.createElement("script"), timer;
+      function cleanup() { clearTimeout(timer); window[cb] = function () {}; s.remove(); }
+      window[cb] = function (res) {
+        cleanup();
+        if (!res || res.status === "error" || !res.table) reject(new Error("sheet")); else resolve(res.table);
+      };
+      s.onerror = function () { cleanup(); reject(new Error("network")); };
+      timer = setTimeout(function () { cleanup(); reject(new Error("timeout")); }, 12000);
+      s.charset = "utf-8";
+      s.src = (window.__WP7_SHEET_URL || WP7.sheetUrl) + cb;
+      document.head.appendChild(s);
+    });
+  }
+  function setStudents(list) {
+    wp.students = list;
+    var when = new Date();
+    try { wp.loadedAt = when.toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" }); } catch (e) { wp.loadedAt = when.toLocaleString(); }
+    writeStore("wp7Students", { students: wp.students, loadedAt: wp.loadedAt });
+    var cl = classesLoaded();
+    if (cl.indexOf(wp.cls) === -1) wp.cls = cl[0] || "";
+    Object.keys(wp.absent).forEach(function (id) { if (!studentById(id)) delete wp.absent[id]; });
+    saveAbsent();
+  }
+
+  // ---- วผ.7 rendering ----
+  var wpEl = {
+    view: document.getElementById("viewWp7"),
+    source: document.getElementById("wpSource"),
+    days: document.getElementById("wpDays"),
+    classes: document.getElementById("wpClasses"),
+    q: document.getElementById("wpQ"),
+    count: document.getElementById("wpCount"),
+    list: document.getElementById("wpList"),
+    panel: document.getElementById("wpPanel")
+  };
+  function sayWp(t) { var n = document.getElementById("wpStatus"); if (n) n.textContent = t; }
+
+  function renderWpSource() {
+    var h;
+    if (wp.students.length) {
+      h = '<p class="src-line">รายชื่อนักเรียน <b class="num">' + wp.students.length + "</b> คน" + (wp.loadedAt ? " · โหลดเมื่อ " + esc(wp.loadedAt) : "") + "</p>" +
+        '<div class="src-actions">' +
+        (EMBEDDED ? "" : '<button type="button" class="btn small" data-wp-load>โหลดใหม่จากชีต</button>') +
+        '<button type="button" class="btn small" data-wp-paste>วางรายชื่อใหม่</button>' +
+        '<button type="button" class="btn small" data-wp-clear>' + (wp.confirmClear ? "กดอีกครั้งเพื่อล้าง" : "ล้างรายชื่อ") + "</button></div>";
+    } else {
+      h = '<p class="src-line"><b>ยังไม่มีรายชื่อนักเรียน</b></p>' +
+        '<p class="hint">รายชื่อไม่ได้เก็บไว้ในหน้าเว็บนี้ ' + (EMBEDDED ? "กด “วางรายชื่อ” แล้ววางจากชีต “รายชื่อนักเรียน”" : "กดโหลดจาก Google Sheet หรือวางรายชื่อจากชีต") +
+        " รายชื่อจะเก็บไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น</p>" +
+        '<div class="src-actions">' +
+        (EMBEDDED ? "" : '<button type="button" class="btn primary small" data-wp-load>โหลดรายชื่อจาก Google Sheet</button>') +
+        '<button type="button" class="btn small' + (EMBEDDED ? " primary" : "") + '" data-wp-paste>วางรายชื่อ</button></div>';
+    }
+    if (wp.students.length && garbled(wp.students)) {
+      h += '<p class="warn">ชื่อนักเรียนที่เก็บไว้อ่านไม่ออก กรุณากด “วางรายชื่อใหม่” แล้วเลือกไฟล์หรือวางจากชีตอีกครั้ง</p>';
+    }
+    if (wp.pasting) {
+      h += '<div class="paste"><label class="label" for="wpPaste">วางรายชื่อจากชีต</label>' +
+        '<p class="hint">เปิดชีต “รายชื่อนักเรียน” กด Ctrl+A แล้ว Ctrl+C จากนั้นคลิกในกล่องนี้แล้วกด Ctrl+V (มือถือ: กดค้างแล้วเลือกวาง) หรือเลือกไฟล์ CSV ที่ดาวน์โหลดจากชีต</p>' +
+        '<textarea id="wpPaste" rows="5" spellcheck="false"></textarea>' +
+        '<input type="file" id="wpFile" accept=".csv,.tsv,.txt,text/csv">' +
+        '<div class="src-actions"><button type="button" class="btn primary small" data-wp-use>ใช้รายชื่อนี้</button>' +
+        '<button type="button" class="btn small" data-wp-cancel>ยกเลิก</button></div></div>';
+    }
+    if (wp.msg) h += '<p class="print-status" role="status">' + esc(wp.msg) + "</p>";
+    wpEl.source.innerHTML = h;
+  }
+
+  function renderWpChips() {
+    wpEl.days.innerHTML = DAYS.map(function (d, i) {
+      return '<button type="button" class="filter" data-wp-day="' + i + '" aria-pressed="' + (wp.day === i) + '">' + esc(d.chip) + "</button>";
+    }).join("");
+    var cl = classesLoaded();
+    if (cl.indexOf(wp.cls) === -1) wp.cls = cl[0] || "";
+    wpEl.classes.innerHTML = cl.length ? cl.map(function (c) {
+      return '<button type="button" class="filter" data-wp-cls="' + c + '" aria-pressed="' + (wp.cls === c) + '">' + c + "</button>";
+    }).join("") : '<span class="hint">ยังไม่มีรายชื่อ</span>';
+  }
+
+  function renderWpList() {
+    if (!wp.students.length) {
+      wpEl.count.textContent = "";
+      wpEl.list.innerHTML = '<p class="empty">โหลดหรือวางรายชื่อนักเรียนก่อน แล้วติ๊กชื่อคนที่ขาดสอบ</p>';
+      return;
+    }
+    var q = norm(wp.q), rows;
+    if (q) rows = wp.students.filter(function (st) { return norm(st.first + st.last + st.id).indexOf(q) !== -1; }).slice(0, 100);
+    else rows = wp.students.filter(function (st) { return st.cls === wp.cls; });
+    var nAbs = rows.filter(function (st) { return isAbsent(st.id, wp.day); }).length;
+    wpEl.count.innerHTML = (q ? "พบ <strong>" + rows.length + "</strong> คน" : "ม." + esc(wp.cls) + " · " + rows.length + " คน") +
+      " · ขาดสอบ " + esc(DAYS[wp.day].chip) + " <strong>" + nAbs + "</strong> คน";
+    wpEl.list.innerHTML = rows.length ? rows.map(function (st) {
+      var on = isAbsent(st.id, wp.day);
+      return '<label class="stu' + (on ? " on" : "") + '"><input type="checkbox" data-wp-stu="' + esc(st.id) + '"' + (on ? " checked" : "") + ">" +
+        '<span class="no num">' + (st.no || "") + '</span><span class="nm">' + esc(fullName(st)) +
+        (q ? '<span class="cls-tag">ม.' + esc(st.cls) + "</span>" : "") + '</span><span class="sid num">' + esc(st.id) + "</span></label>";
+    }).join("") : '<p class="empty">ไม่พบนักเรียนที่ตรงกับ “' + esc(wp.q) + "”</p>";
+  }
+
+  function absCard(st) {
+    var a = wp.absent[st.id], id = esc(st.id);
+    return '<article class="abs"><div class="abs-head"><div><b>' + esc(fullName(st)) + "</b><span>ม." + esc(st.cls) + " เลขที่ " + st.no + " · เลขประจำตัว " + id + "</span></div>" +
+      '<button type="button" class="btn small" data-wp-remove="' + id + '">นำออก</button></div>' +
+      '<div class="abs-row"><label class="reason">เนื่องจาก <input type="text" list="wpReasons" data-wp-reason="' + id + '" value="' + esc(a.reason || "") + '"></label>' +
+      '<label class="tick"><input type="checkbox" data-wp-memo="' + id + '"' + (a.memo ? " checked" : "") + "> ทำบันทึกข้อความแล้ว</label>" +
+      '<label class="tick"><input type="checkbox" data-wp-cert="' + id + '"' + (a.cert ? " checked" : "") + "> ใบรับรองแพทย์</label></div>" +
+      Object.keys(a.days).map(Number).sort().map(function (d) {
+        return '<div class="abs-day"><span class="day-label">' + esc(DAYS[d].chip) + '</span><div class="chips">' +
+          subjectsFor(st.cls, d).map(function (s) {
+            return '<button type="button" class="filter sub" data-wp-sub="' + id + "|" + d + "|" + s.code + '" aria-pressed="' + (a.days[d].indexOf(s.code) !== -1) + '"><b>' + s.code + "</b> " + esc(s.name) + "</button>";
+          }).join("") +
+          (a.days[d].length ? "" : '<span class="warn">ไม่ได้เลือกรายวิชา วันนี้จะไม่ถูกพิมพ์</span>') + "</div></div>";
+      }).join("") + "</article>";
+  }
+
+  function renderWpPanel() {
+    var people = absentStudents(), items = wp7Items();
+    var h = '<div class="detail-head"><div><p class="eyebrow">วผ.7 · ' + WP7.term + " ปีการศึกษา " + WP7.year + "</p>" +
+      "<h2>บันทึกข้อความขอสอบย้อนหลัง</h2>" +
+      '<p class="when">ติ๊กชื่อนักเรียนที่ขาดสอบในรายชื่อ ตรวจรายวิชาและเหตุผล แล้วพิมพ์ 1 แผ่นต่อ 1 วันที่ขาดสอบ</p></div>' +
+      '<div class="field"><label class="label" for="wpDate">วันที่ในบันทึกข้อความ</label><input type="date" id="wpDate" value="' + esc(wp.memoDate) + '"></div></div>';
+    if (!people.length) {
+      h += '<p class="empty">' + (wp.students.length ? "ยังไม่ได้เลือกนักเรียน เลือกวันที่ขาดสอบและห้องเรียน แล้วติ๊กชื่อนักเรียนที่ขาดสอบในรายชื่อ" : "โหลดหรือวางรายชื่อนักเรียนก่อน") + "</p>";
+    } else {
+      var buttons = [];
+      function add(attr, label) { buttons.push('<button type="button" class="btn' + (buttons.length ? "" : " primary") + '" ' + attr + ">" + label + "</button>"); }
+      if (CAN_PRINT) add("data-wp-images", "ดูตัวอย่างและพิมพ์");
+      if (downloadsReady !== false) add("data-wp-pdf", "ดาวน์โหลด PDF");
+      if (!CAN_PRINT) add("data-wp-images", "ดูภาพสำหรับพิมพ์");
+      h += '<div class="abs-list">' + people.map(absCard).join("") + "</div>" +
+        '<datalist id="wpReasons">' + WP7.reasons.map(function (r) { return '<option value="' + esc(r) + '">'; }).join("") + "</datalist>" +
+        '<div class="wp-actions"><p class="wp-sum"><b class="num">' + people.length + '</b> คน · <b class="num">' + items.length + "</b> แผ่น</p>" +
+        '<div class="doc-actions">' + buttons.join("") + "</div></div>" +
+        '<p class="print-status" id="wpStatus" role="status">' + (downloadsReady === false && !CAN_PRINT ? esc(NO_DOWNLOAD) : "") + "</p>";
+    }
+    wpEl.panel.innerHTML = h;
+  }
+
+  function renderWp7() {
+    renderWpSource();
+    renderWpChips();
+    renderWpList();
+    renderWpPanel();
+  }
+
+  function loadSheet() {
+    if (wp.loading) return;
+    wp.loading = true;
+    wp.msg = "กำลังโหลดรายชื่อจาก Google Sheet…";
+    renderWpSource();
+    loadFromSheet().then(function (table) {
+      var list = rowsFromGviz(table);
+      if (!list.length) throw new Error("empty");
+      setStudents(list);
+      wp.msg = "โหลดรายชื่อแล้ว " + list.length + " คน";
+    }).catch(function () {
+      wp.msg = "โหลดจากชีตไม่ได้ ชีตอาจยังไม่ได้ตั้งให้ทุกคนที่มีลิงก์ดูได้ กด “วางรายชื่อ” แล้ววางจากชีตแทน";
+    }).then(function () {
+      wp.loading = false;
+      renderWp7();
+    });
+  }
+
+  // CSV files saved by Excel on Thai Windows are usually Windows-874 (TIS-620) or UTF-16, not UTF-8.
+  function decodeText(buf) {
+    var b = new Uint8Array(buf || new ArrayBuffer(0));
+    try {
+      if (b[0] === 0xFF && b[1] === 0xFE) return new TextDecoder("utf-16le").decode(b.subarray(2));
+      if (b[0] === 0xFE && b[1] === 0xFF) return new TextDecoder("utf-16be").decode(b.subarray(2));
+      return new TextDecoder("utf-8", { fatal: true }).decode(b);
+    } catch (e) {
+      try { return new TextDecoder("windows-874").decode(b); } catch (e2) { return new TextDecoder("utf-8").decode(b); }
+    }
+  }
+  function garbled(list) {
+    return list.some(function (st) { return /\uFFFD/.test(st.first + st.last); });
+  }
+
+  function usePasted(text) {
+    var list = parsePasted(text);
+    if (list.length && garbled(list)) {
+      wp.msg = "อ่านภาษาไทยในไฟล์ไม่ได้ กรุณาเปิดชีต “รายชื่อนักเรียน” แล้วคัดลอกมาวางในกล่องแทน หรือดาวน์โหลดจาก Google Sheets เป็น CSV แล้วเลือกไฟล์นั้น";
+      renderWpSource();
+      return;
+    }
+    if (!list.length) {
+      wp.msg = "อ่านรายชื่อไม่ได้ กรุณาคัดลอกทั้งชีตรวมแถวหัวตาราง (เลขที่ เลขประจำตัว ชื่อ สกุล ... ห้อง) แล้ววางอีกครั้ง";
+      renderWpSource();
+      return;
+    }
+    setStudents(list);
+    wp.pasting = false;
+    wp.msg = "ใช้รายชื่อแล้ว " + list.length + " คน";
+    renderWp7();
+  }
+
+  wpEl.view.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-wp-day], [data-wp-cls], [data-wp-sub], [data-wp-remove], [data-wp-load], [data-wp-paste], [data-wp-cancel], [data-wp-use], [data-wp-clear], [data-wp-images], [data-wp-pdf]");
+    if (!t) return;
+    if (!t.hasAttribute("data-wp-clear")) wp.confirmClear = false;
+    if (t.hasAttribute("data-wp-day")) { wp.day = Number(t.getAttribute("data-wp-day")); renderWpChips(); renderWpList(); }
+    else if (t.hasAttribute("data-wp-cls")) { wp.cls = t.getAttribute("data-wp-cls"); wp.q = ""; wpEl.q.value = ""; renderWpChips(); renderWpList(); }
+    else if (t.hasAttribute("data-wp-sub")) {
+      var parts = t.getAttribute("data-wp-sub").split("|"), a = wp.absent[parts[0]];
+      if (!a || !a.days[parts[1]]) return;
+      var list = a.days[parts[1]], at = list.indexOf(parts[2]);
+      if (at === -1) list.push(parts[2]); else list.splice(at, 1);
+      saveAbsent();
+      renderWpPanel();
+    } else if (t.hasAttribute("data-wp-remove")) {
+      delete wp.absent[t.getAttribute("data-wp-remove")];
+      saveAbsent();
+      renderWpList();
+      renderWpPanel();
+    } else if (t.hasAttribute("data-wp-load")) loadSheet();
+    else if (t.hasAttribute("data-wp-paste")) {
+      wp.pasting = true; wp.msg = "";
+      renderWpSource();
+      var ta = document.getElementById("wpPaste");
+      if (ta) ta.focus();
+    } else if (t.hasAttribute("data-wp-cancel")) { wp.pasting = false; wp.msg = ""; renderWpSource(); }
+    else if (t.hasAttribute("data-wp-use")) usePasted((document.getElementById("wpPaste") || {}).value);
+    else if (t.hasAttribute("data-wp-clear")) {
+      if (!wp.confirmClear) { wp.confirmClear = true; renderWpSource(); return; }
+      wp.confirmClear = false;
+      wp.students = []; wp.absent = {}; wp.loadedAt = ""; wp.msg = "ล้างรายชื่อออกจากเบราว์เซอร์นี้แล้ว";
+      writeStore("wp7Students", null);
+      writeStore("wp7Absent", null);
+      renderWp7();
+    } else {
+      var items = wp7Items();
+      if (!items.length) { sayWp("ยังไม่มีหน้าที่จะพิมพ์ กรุณาเลือกรายวิชาอย่างน้อย 1 วิชา"); return; }
+      if (t.hasAttribute("data-wp-images")) showImages(wp7Doc(items), 0);
+      else downloadPdf(wp7Doc(items), t, sayWp);
+    }
+  });
+  wpEl.view.addEventListener("change", function (e) {
+    var t = e.target, id;
+    if (t.hasAttribute("data-wp-stu")) {
+      var st = studentById(t.getAttribute("data-wp-stu"));
+      if (!st) return;
+      setAbsent(st, wp.day, t.checked);
+      renderWpList();
+      renderWpPanel();
+    } else if ((id = t.getAttribute("data-wp-memo")) && wp.absent[id]) { wp.absent[id].memo = t.checked; saveAbsent(); }
+    else if ((id = t.getAttribute("data-wp-cert")) && wp.absent[id]) { wp.absent[id].cert = t.checked; saveAbsent(); }
+    else if (t.id === "wpDate") { wp.memoDate = t.value || isoToday(); }
+    else if (t.id === "wpFile" && t.files && t.files[0]) {
+      var fr = new FileReader();
+      fr.onload = function () { usePasted(decodeText(fr.result)); };
+      fr.readAsArrayBuffer(t.files[0]);
+    }
+  });
+  wpEl.view.addEventListener("input", function (e) {
+    var t = e.target, id = t.getAttribute("data-wp-reason");
+    if (id && wp.absent[id]) { wp.absent[id].reason = t.value.trim(); saveAbsent(); }
+    else if (t.id === "wpQ") { wp.q = t.value; renderWpList(); }
+  });
+
+  // ---------- views ----------
+  var tabNumbers = document.getElementById("tabNumbers"), tabWp7 = document.getElementById("tabWp7");
+  var viewNumbers = document.getElementById("viewNumbers");
+  function route() {
+    var h = location.hash.slice(1), onWp = h === "wp7";
+    viewNumbers.hidden = onWp;
+    wpEl.view.hidden = !onWp;
+    tabNumbers.href = "#" + state.selected;
+    if (onWp) { tabWp7.setAttribute("aria-current", "page"); tabNumbers.removeAttribute("aria-current"); renderWp7(); }
+    else {
+      tabNumbers.setAttribute("aria-current", "page");
+      tabWp7.removeAttribute("aria-current");
+      if (h && h !== state.selected && SUBJECTS.some(function (s) { return s.id === h; })) select(h, false);
+    }
+  }
+
   // ---------- events ----------
   function select(id, scroll) {
     if (!SUBJECTS.some(function (s) { return s.id === id; })) return;
@@ -1452,6 +3432,7 @@ select#group {
     if (location.hash !== "#" + id) {
       try { history.replaceState(null, "", "#" + id); } catch (e) { location.hash = id; }
     }
+    tabNumbers.href = "#" + id;
     renderList();
     renderDetail();
     if (scroll && window.matchMedia("(max-width: 900px)").matches) {
@@ -1518,17 +3499,14 @@ select#group {
       var again = el.detail.querySelector('[data-spares="' + print.spares + '"]');
       if (again) again.focus();
     } else if (t.hasAttribute("data-pdf")) {
-      downloadPdf(s, t.getAttribute("data-pdf"), t);
+      downloadPdf(examDoc(s, t.getAttribute("data-pdf")), t, setPrintStatus);
     } else if (t.hasAttribute("data-images")) {
-      showImages(s, t.getAttribute("data-images"), 0);
+      showImages(examDoc(s, t.getAttribute("data-images")), 0);
     } else {
-      showImages(s, t.getAttribute("data-thumb"), Number(t.getAttribute("data-page")));
+      showImages(examDoc(s, t.getAttribute("data-thumb")), Number(t.getAttribute("data-page")));
     }
   });
-  window.addEventListener("hashchange", function () {
-    var id = location.hash.slice(1);
-    if (id && id !== state.selected) select(id, false);
-  });
+  window.addEventListener("hashchange", route);
 
   // ---------- start ----------
   var initial = location.hash.slice(1);
@@ -1537,8 +3515,12 @@ select#group {
   renderGroupSelect();
   renderList();
   renderDetail();
+  route();
 
-  window.__EXAM_DATA__ = { SUBJECTS: SUBJECTS, subjectText: subjectText, makePdf: makePdf, pagesFor: pagesFor, paint: paint };
+  window.__EXAM_DATA__ = {
+    SUBJECTS: SUBJECTS, subjectText: subjectText, makePdf: makePdf, pagesFor: pagesFor, paint: paint,
+    wp7: { parsePasted: parsePasted, rowsFromGviz: rowsFromGviz, wp7Items: wp7Items, wp7Doc: wp7Doc, makePdfDoc: makePdfDoc, state: wp }
+  };
 })();
 </script>
 
